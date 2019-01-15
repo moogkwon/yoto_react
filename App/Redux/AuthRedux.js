@@ -5,7 +5,7 @@ import { AsyncStorage } from 'react-native'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  facebookLogin: ['data'],
+  socialLogin: ['data'],
   loginSuccess: ['data'],
   setUser: ['user'],
   logoutSuccess: null
@@ -26,7 +26,7 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const facebookLogin = (state, { data }) => state
+export const socialLogin = (state, { data }) => state
 export const loginSuccess = (state, { data }) => {
   return state.merge({ ...data })
 }
@@ -38,7 +38,7 @@ export const logoutSuccess = (state) => {
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.FACEBOOK_LOGIN]: facebookLogin,
+  [Types.SOCIAL_LOGIN]: socialLogin,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.SET_USER]: setUser,
   [Types.LOGOUT_SUCCESS]: logoutSuccess

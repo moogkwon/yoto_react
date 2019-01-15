@@ -74,11 +74,11 @@ class AppNavigation extends Component {
               key='root'
               titleStyle={{ alignSelf: 'center' }}
              >
-              <Scene key='login' component={LoginScreen} title='Login' />
               <Scene key='randomMode' component={RandomModeScreen} title='Webrtc' />
             </Stack>
 
             <Scene key='launch' component={LaunchScreen} title='Launch' initial />
+            <Scene key='login' component={LoginScreen} title='Login' />
           </Modal>
 
         </Overlay>

@@ -12,21 +12,27 @@
 
 import { call, put } from 'redux-saga/effects'
 import AuthActions from '../Redux/AuthRedux'
+import { Actions } from 'react-native-router-flux'
 // import { AuthSelectors } from '../Redux/AuthRedux'
 
-export function * facebookLogin (api, action) {
-  const { data: { token } } = action
-  // get current data from Store
-  // const currentData = yield select(AuthSelectors.getData)
-  // make the call to the api
-  const response = yield call(api.facebookLogin, { token })
+export function * socialLogin (api, action) {
+  const { data } = action
+  const form = new FormData()
 
+  form.append('token', data['token'])
+  form.append('type', data['type'])
+
+  // make the call to the api
+  const response = yield call(api.socialLogin, form)
+  __DEV__ && console.log('social login response', response)
   // success?
-  if (response.ok) {
+  if (response.ok && response.data.code < 300) {
     // You might need to change the response here - do this with a 'transform',
     // located in ../Transforms/. Otherwise, just pass the data back from the api.
-    yield put(AuthActions.authSuccess(response.data))
+    yield put(AuthActions.loginSuccess(response.data))
+    Actions.root({ type: 'replace' })
   } else {
-    yield put(AuthActions.authFailure())
+    alert('login error')
+    // yield put(AuthActions.loginFailure())
   }
 }
