@@ -14,7 +14,8 @@ import {
 } from 'react-native-router-flux'
 
 import LaunchScreen from '../Containers/LaunchScreen'
-import TabView from '../Containers/TabView'
+import RandomModeScreen from '../Containers/RandomModeScreen'
+import LoginScreen from '../Containers/LoginScreen'
 
 const styles = StyleSheet.create({
   container: {
@@ -72,35 +73,12 @@ class AppNavigation extends Component {
               hideNavBar
               key='root'
               titleStyle={{ alignSelf: 'center' }}
-            >
-              <Tabs
-                key='tabBar'
-                swipeEnabled
-                showLabel={false}
-                tabBarStyle={styles.tabBarStyle}
-                activeBackgroundColor='white'
-                inactiveBackgroundColor='rgba(255, 0, 0, 0.5)'
-                tabBarPosition='bottom'
-              >
-                <Scene
-                  key='tab1'
-                  component={TabView}
-                  title='Tab #1'
-
-                />
-
-                <Scene
-                  key='tab2'
-                  component={TabView}
-                  title='Tab #2'
-                  back
-                />
-
-              </Tabs>
+             >
+              <Scene key='login' component={LoginScreen} title='Login' />
+              <Scene key='randomMode' component={RandomModeScreen} title='Webrtc' />
             </Stack>
 
             <Scene key='launch' component={LaunchScreen} title='Launch' initial />
-
           </Modal>
 
         </Overlay>
