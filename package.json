@@ -39,13 +39,15 @@
     "react-native-fbsdk": "^0.8.0",
     "react-native-iphone-x-helper": "^1.0.1",
     "react-native-router-flux": "4.0.5",
+    "react-native-webrtc": "^1.67.1",
     "react-redux": "^5.0.6",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-saga": "^0.16.0",
     "reduxsauce": "0.7.0",
-    "seamless-immutable": "^7.1.4"
+    "seamless-immutable": "^7.1.4",
+    "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
     "@storybook/addon-storyshots": "^3.4.0",

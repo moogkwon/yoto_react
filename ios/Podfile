@@ -8,4 +8,6 @@ target 'Yoto' do
   # Pods for Yoto
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
+  pod 'react-native-webrtc', :path => '../node_modules/react-native-webrtc'
+
 end
