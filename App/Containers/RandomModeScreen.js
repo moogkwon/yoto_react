@@ -30,9 +30,12 @@ class RandomModeScreen extends Component {
       videoURL: null,
       connected: false,
       IceConnectionState: '',
-      pendingCandidates: []
+      pendingCandidates: [],
+      status: ''
     }
 
+    this.startHunting = this.startHunting.bind(this)
+    this.stopHunting = this.stopHunting.bind(this)
     this.onPressAccept = this.onPressAccept.bind(this)
     this.onPressNext = this.onPressNext.bind(this)
     this.onIceConnectionStateChange = this.onIceConnectionStateChange.bind(this)
@@ -66,34 +69,39 @@ class RandomModeScreen extends Component {
         </View>
         <View style={this.state.connected ? styles.onlineCircle : styles.offlineCircle} />
         <View style={styles.bottomView}>
-          {!!this.state.otherUser && (
-            <View style={styles.matching}>
-              <Text style={styles.connect}>
-                {this.state.otherUser.name}
-              </Text>
+          <View style={styles.matching}>
+            {!!this.state.otherUser && (
+              <Text style={styles.connect}>{this.state.otherUser.name}</Text>
+            )}
 
-              {!this.state.isAccepted
-                ? (
-                  <TouchableOpacity onPress={this.onPressAccept} disabled={this.state.offerReceived}>
-                    <Text style={styles.connect}>
-                      Accept
-                  </Text>
-                  </TouchableOpacity>
-                )
-                : (
-                  <Text style={styles.connect}>
-                    Waiting...
-                  </Text>
-                )
-              }
-
-              <TouchableOpacity onPress={this.onPressNext} disabled={this.state.offerReceived}>
-                <Text style={styles.connect}>
-                  Next
-                  </Text>
+            {this.state.status === 'matching' && (
+              <TouchableOpacity onPress={this.onPressAccept}>
+                <Text style={styles.connect}>Accept</Text>
               </TouchableOpacity>
-            </View>
-          )}
+            )}
+            {this.state.status === 'waiting' && (
+              <Text style={styles.connect}>Waiting...</Text>
+            )}
+            {this.state.status === 'calling' && (
+              <Text style={styles.connect}>Calling...</Text>
+            )}
+            {this.state.status === '' && this.state.connected && (
+              <TouchableOpacity onPress={this.startHunting}>
+                <Text style={styles.connect}>Tap to begin</Text>
+              </TouchableOpacity>
+            )}
+            {this.state.status === 'hunting' && (
+              <TouchableOpacity onPress={this.stopHunting}>
+                <Text style={styles.connect}>Stop hunting</Text>
+              </TouchableOpacity>
+            )}
+
+            {!!this.state.otherUser && (
+              <TouchableOpacity onPress={this.onPressNext}>
+                <Text style={styles.connect}>Next</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
       </View>
     )
@@ -106,19 +114,13 @@ class RandomModeScreen extends Component {
     this.socket.on('connect', () => {
       console.log('Socket Connected!')
       this.setState({ connected: true })
-      setTimeout(() => {
-        this.socket.emit('_hunting_start')
-      }, 1000)
     })
     this.socket.on('message', (message) => console.log(message))
     this.socket.on('disconnect', () => {
       console.log('Socket Closed')
       this.setState({ connected: false })
     })
-    this.socket.on('match_new', (data) => {
-      console.log('new matching', data)
-      this.setState({ otherUser: data.user })
-    })
+    this.socket.on('match_new', (data) => this.onNewMaching(data))
     this.socket.on('match_close', () => this.closeMatching())
     this.socket.on('call_start', (data) => this.sendOffer(data))
     this.socket.on('call_offer', (data) => this.onOfferReceived(data))
@@ -131,6 +133,21 @@ class RandomModeScreen extends Component {
   componentWillUnmount () {
     this.closeMatching()
     this.socket && this.socket.close()
+  }
+
+  startHunting () {
+    this.socket.emit('_hunting_start')
+    this.setState({ status: 'hunting' })
+  }
+
+  stopHunting () {
+    this.socket.emit('_stop_start')
+    this.setState({ status: '' })
+  }
+
+  onNewMaching (data) {
+    console.log('new matching', data)
+    this.setState({ otherUser: data.user, status: 'matching' })
   }
 
   setupMediaStream () {
@@ -165,7 +182,7 @@ class RandomModeScreen extends Component {
         this.localStream = stream
       })
       .catch(e => {
-        console.error('Failed to setup stream:', e.message)
+        console.log('Failed to setup stream:', e.message)
       })
   }
 
@@ -186,7 +203,7 @@ class RandomModeScreen extends Component {
     this.closeMatching()
   }
 
-  closeMatching () {
+  closeMatching (exit) {
     if (this.peer) {
       this.peer.close()
       delete this.peer
@@ -196,7 +213,7 @@ class RandomModeScreen extends Component {
       otherUser: null,
       remoteStreamURL: null,
       pendingRemoteIceCandidates: [],
-      isAccepted: false
+      status: ''
     })
   }
 
@@ -204,7 +221,7 @@ class RandomModeScreen extends Component {
     !this.peer && this.setupWebRTC()
     console.log('send match accept and to other user')
     this.socket.emit('_match_accept')
-    this.setState({ isAccepted: true })
+    this.setState({ isAccepted: true, status: 'waiting' })
   }
 
   async sendOffer (e) {
@@ -223,34 +240,46 @@ class RandomModeScreen extends Component {
       console.log('send offer to other user')
       this.socket.emit('_call_offer', { offer })
     } catch (e) {
-      console.error('Failed to setup local offer', e)
+      console.log('Failed to setup local offer', e)
+      this.closeMatching()
     }
   }
 
   async onOfferReceived (data) {
     console.log('recieved offer', data)
-    !this.peer && this.setupWebRTC()
-    const { peer } = this
+    try {
+      !this.peer && this.setupWebRTC()
+      const { peer } = this
 
-    await peer.setRemoteDescription(new RTCSessionDescription(data.offer))
+      await peer.setRemoteDescription(new RTCSessionDescription(data.offer))
 
-    console.log('create answer')
-    const answer = await peer.createAnswer()
-    await peer.setLocalDescription(answer)
-    console.log('send answer to server')
-    this.socket.emit('_call_answer', { answer })
-    this.setState({
-      offerAnswered: true
-    })
+      console.log('create answer')
+      const answer = await peer.createAnswer()
+      await peer.setLocalDescription(answer)
+      console.log('send answer to server')
+      this.socket.emit('_call_answer', { answer })
+      this.setState({
+        offerAnswered: true,
+        status: 'calling'
+      })
+    } catch (error) {
+      console.log(error)
+      this.closeMatching()
+    }
   }
 
   async onAnswerReceived (data) {
     console.log('recieved answer', data)
-    await this.peer.setRemoteDescription(new RTCSessionDescription(data.answer))
-    // data.candidates.forEach(c => this.peer.addIceCandidate(new RTCIceCandidate(c)))
-    this.setState({
-      answerRecevied: true
-    })
+    try {
+      await this.peer.setRemoteDescription(new RTCSessionDescription(data.answer))
+      this.setState({
+        answerRecevied: true,
+        status: 'calling'
+      })
+    } catch (error) {
+      console.log(error)
+      this.closeMatching()
+    }
   }
 
   onIceConnectionStateChange (e) {
@@ -284,30 +313,34 @@ class RandomModeScreen extends Component {
         })
       }
     } else { // Candidate gathering complete
-      if (this.state.pendingCandidates.length > 1) {
+      if (this.state.pendingCandidates.length > 1 && this.state.otherUser) {
         console.log('sending candidates')
         this.socket.emit('_candidate', {
           user_id: this.state.otherUser._id,
           candidates: this.state.pendingCandidates
         })
       } else {
-        console.error('Failed to send an offer/answer: No candidates')
+        console.log('Failed to send an offer/answer: No candidates')
       }
     }
   }
 
   async onRemoteIceCandidate (data) {
     console.log('recieved candidates', data)
-    if (data.candidates) {
-      if (this.peer) {
-        for (let candidate of data.candidates) {
-          await this.peer.addIceCandidate(new RTCIceCandidate(candidate))
+    try {
+      if (data.candidates) {
+        if (this.peer) {
+          for (let candidate of data.candidates) {
+            await this.peer.addIceCandidate(new RTCIceCandidate(candidate))
+          }
+        } else {
+          console.log('Peer is not ready')
         }
       } else {
-        console.error('Peer is not ready')
+        console.log('Remote ICE Candidates Gathered!')
       }
-    } else {
-      console.log('Remote ICE Candidates Gathered!')
+    } catch (error) {
+      console.log(error)
     }
   }
 
