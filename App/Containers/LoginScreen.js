@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -8,43 +8,31 @@ import { LoginButton, AccessToken } from 'react-native-fbsdk'
 // Styles
 import styles from './Styles/LoginScreenStyle'
 import { bindActionCreators, AuthActions } from '../Redux/Actions'
+import { Images } from '../Themes'
+import { Actions } from 'react-native-router-flux'
 
 class LoginScreen extends Component {
-  componentDidMount () {
-    this.checkLogin()
-  }
-
-  async checkLogin () {
-    const data = await AccessToken.getCurrentAccessToken()
-    if (data.accessToken) {
-      this.props.socialLogin('facebook', { social_token: data.accessToken.toString() })
-    }
-  }
-
   render () {
     return (
-      <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
-          <Text>LoginScreen</Text>
-          <LoginButton
-            onLoginFinished={
-              (error, result) => {
-                if (error) {
-                  console.log('login has error: ' + result.error)
-                } else if (result.isCancelled) {
-                  console.log('login is cancelled.')
-                } else {
-                  AccessToken.getCurrentAccessToken().then(
-                    (data) => {
-                      this.props.socialLogin('facebook', { social_token: data.accessToken.toString() })
-                    }
-                  )
-                }
-              }
-            }
-            onLogoutFinished={() => console.log('logout.')} />
-        </KeyboardAvoidingView>
-      </ScrollView>
+      <View style={styles.container}>
+        <Image source={Images.logo} style={styles.logo} resizeMode='contain' />
+
+        <TouchableOpacity style={styles.phoneLoginButton} onPress={Actions.register}>
+          <Text style={styles.phoneLoginText}>Sign Up with Phone <Text style={styles.emoji}>📱</Text></Text>
+        </TouchableOpacity>
+
+        <View style={styles.bottomView}>
+          <TouchableOpacity style={styles.roundButton} onPress={Actions.register}>
+            <Image source={Images.facebook} style={styles.roundImage} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.roundButton} onPress={Actions.register}>
+            <Image source={Images.instagram} style={styles.roundImage} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.roundButton} onPress={Actions.register}>
+            <Image source={Images.google} style={styles.roundImage} />
+          </TouchableOpacity>
+        </View>
+      </View>
     )
   }
 }
