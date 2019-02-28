@@ -5,7 +5,7 @@ import { AsyncStorage } from 'react-native'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  socialLogin: ['data'],
+  socialLogin: ['social', 'data'],
   loginSuccess: ['data'],
   setUser: ['user'],
   logoutSuccess: null
@@ -26,7 +26,7 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const socialLogin = (state, { data }) => state
+export const socialLogin = (state) => state
 export const loginSuccess = (state, { data }) => {
   return state.merge({ ...data })
 }

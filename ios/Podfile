@@ -6,8 +6,29 @@ target 'Yoto' do
   # use_frameworks!
 
   # Pods for Yoto
+  rn_path = '../node_modules/react-native'
+  pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
+  pod 'React', path: rn_path, subspecs: [
+      'Core',
+      'ART',
+      'RCTActionSheet',
+      'RCTAnimation',
+      'RCTLinkingIOS',
+      'RCTGeolocation',
+      'RCTImage',
+      'RCTNetwork',
+      'RCTText',
+      'RCTVibration',
+      'RCTWebSocket',
+      'DevSupport',
+      # 'CxxBridge',
+      # 'RCTTest'
+  ]
+  
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
   pod 'react-native-webrtc', :path => '../node_modules/react-native-webrtc'
+
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
 
 end

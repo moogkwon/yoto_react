@@ -16,17 +16,12 @@ import { Actions } from 'react-native-router-flux'
 // import { AuthSelectors } from '../Redux/AuthRedux'
 
 export function * socialLogin (api, action) {
-  const { data } = action
-  const form = new FormData()
-
-  form.append('token', data['token'])
-  form.append('type', data['type'])
-
+  const { social, data } = action
   // make the call to the api
-  const response = yield call(api.socialLogin, form)
+  const response = yield call(api.socialLogin, social, data)
   __DEV__ && console.log('social login response', response)
   // success?
-  if (response.ok && response.data.code < 300) {
+  if (response.ok && response.status < 300) {
     // You might need to change the response here - do this with a 'transform',
     // located in ../Transforms/. Otherwise, just pass the data back from the api.
     yield put(AuthActions.loginSuccess(response.data))

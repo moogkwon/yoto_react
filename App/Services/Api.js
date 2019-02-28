@@ -2,7 +2,7 @@
 import apisauce from 'apisauce'
 
 // our "constructor"
-const create = (baseURL = 'http://admin.coolfriend.co/v1') => {
+const create = (baseURL = 'http://3.93.63.217:3333/api/v1') => {
   // ------
   // STEP 1
   // ------
@@ -34,7 +34,7 @@ const create = (baseURL = 'http://admin.coolfriend.co/v1') => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const socialLogin = (data) => api.post('/user/login', data)
+  const socialLogin = (social, data) => api.post(`/auth/login/${social}`, data)
 
   // ------
   // STEP 3

@@ -141,6 +141,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-device-info')
     implementation project(':react-native-webrtc')
     implementation project(':react-native-fbsdk')
     implementation 'com.facebook.android:facebook-android-sdk:4.34.0'

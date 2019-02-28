@@ -17,7 +17,7 @@ class LoginScreen extends Component {
   async checkLogin () {
     const data = await AccessToken.getCurrentAccessToken()
     if (data.accessToken) {
-      this.props.socialLogin({ token: data.accessToken.toString(), type: 'facebook' })
+      this.props.socialLogin('facebook', { social_token: data.accessToken.toString() })
     }
   }
 
@@ -36,7 +36,7 @@ class LoginScreen extends Component {
                 } else {
                   AccessToken.getCurrentAccessToken().then(
                     (data) => {
-                      this.props.socialLogin({ token: data.accessToken.toString(), type: 'facebook' })
+                      this.props.socialLogin('facebook', { social_token: data.accessToken.toString() })
                     }
                   )
                 }
