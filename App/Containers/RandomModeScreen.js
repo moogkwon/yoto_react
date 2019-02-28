@@ -234,11 +234,6 @@ class RandomModeScreen extends Component {
 
     await peer.setRemoteDescription(new RTCSessionDescription(data.offer))
 
-    // console.log('add pendding remote candidates')
-    // if (Array.isArray(data.candidates)) {
-    //   data.candidates.forEach((c) => peer.addIceCandidate(new RTCIceCandidate(c)))
-    // }
-
     console.log('create answer')
     const answer = await peer.createAnswer()
     await peer.setLocalDescription(answer)
@@ -277,7 +272,7 @@ class RandomModeScreen extends Component {
   onIceCandiate (event) {
     const { candidate } = event
     console.log('ICE Candidate Found:', candidate)
-    if (candidate) {
+    if (candidate) { // push candidate to stack
       let pendingRemoteIceCandidates = this.state.pendingCandidates
       if (Array.isArray(pendingRemoteIceCandidates)) {
         this.setState({
