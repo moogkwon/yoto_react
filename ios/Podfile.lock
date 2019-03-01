@@ -15,6 +15,7 @@ PODS:
   - lottie-react-native (2.5.11):
     - lottie-ios
     - React
+  - QBImagePickerController (3.4.0)
   - React (0.57.7):
     - React/Core (= 0.57.7)
   - react-native-fbsdk (0.8.0):
@@ -66,6 +67,11 @@ PODS:
     - React/RCTBlob
   - RNDeviceInfo (0.21.5):
     - React
+  - RNImageCropPicker (0.23.0):
+    - QBImagePickerController
+    - React/Core
+    - RSKImageCropper
+  - RSKImageCropper (2.2.1)
   - yoga (0.57.7.React)
 
 DEPENDENCIES:
@@ -86,6 +92,7 @@ DEPENDENCIES:
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 SPEC REPOS:
@@ -94,6 +101,8 @@ SPEC REPOS:
     - FBSDKCoreKit
     - FBSDKLoginKit
     - FBSDKShareKit
+    - QBImagePickerController
+    - RSKImageCropper
 
 EXTERNAL SOURCES:
   lottie-ios:
@@ -108,6 +117,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-webrtc"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
 
@@ -118,12 +129,15 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 0e45916f4150da485928ae2a17ca021950b194f5
   lottie-ios: 9f24be3ecb13412223b6ac70d97437742b0e3de1
   lottie-react-native: 31ceb9d2d1423fa99c64d19eb93c0364256a6a3e
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-webrtc: 31b6d3f1e3e2ce373aa43fd682b04367250f807d
   RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
+  RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
+  RSKImageCropper: 98296ad26b41753f796b6898d015509598f13d97
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: a30e17cc21a6a132999e5255fac26376657528e9
+PODFILE CHECKSUM: 50d012f0bee4fdba76f99efeafd87a28b24b72a3
 
 COCOAPODS: 1.5.3

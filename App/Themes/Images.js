@@ -4,6 +4,7 @@ const images = {
   facebook: require('../Images/facebook.png'),
   instagram: require('../Images/instagram.png'),
   google: require('../Images/google.png'),
+  hilarious: require('../Images/hilarious.gif'),
   icBirthDay: require('../Images/Icons/birthday.png'),
   icFemale: require('../Images/Icons/female.png'),
   icFemaleActive: require('../Images/Icons/female-active.png'),

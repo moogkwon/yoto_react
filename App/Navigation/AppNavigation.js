@@ -17,6 +17,7 @@ import LaunchScreen from '../Containers/LaunchScreen'
 import RandomModeScreen from '../Containers/RandomModeScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import RegisterScreen from '../Containers/RegisterScreen'
+import UploadProfileScreen from '../Containers/UploadProfileScreen'
 
 const styles = StyleSheet.create({
   container: {
@@ -81,6 +82,7 @@ class AppNavigation extends Component {
             <Scene key='launch' component={LaunchScreen} title='Launch' initial />
             <Scene key='login' component={LoginScreen} title='Login' type='reset' />
             <Scene key='register' component={RegisterScreen} title='Register' type='reset' />
+            <Scene key='upload' component={UploadProfileScreen} title='Upload' type='reset' />
           </Modal>
 
         </Overlay>
