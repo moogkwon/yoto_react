@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -24,6 +23,8 @@
 		59897C4EFEC319D75313B346 /* libPods-Yoto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C17A36EE5FBD8CA8BDAE4083 /* libPods-Yoto.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		3C317523DF1B4A05866D5EB1 /* AlteHaasGroteskBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C491E2A0991747699CCB6E0D /* AlteHaasGroteskBold.ttf */; };
+		C25ABE74B8724E89B8A82F4E /* AlteHaasGroteskRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F33C7652AAB8468CA44F20A8 /* AlteHaasGroteskRegular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +314,8 @@
 		9124BD7BE98654901C788A98 /* Pods-Yoto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yoto.release.xcconfig"; path = "Pods/Target Support Files/Pods-Yoto/Pods-Yoto.release.xcconfig"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		C17A36EE5FBD8CA8BDAE4083 /* libPods-Yoto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yoto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C491E2A0991747699CCB6E0D /* AlteHaasGroteskBold.ttf */ = {isa = PBXFileReference; name = "AlteHaasGroteskBold.ttf"; path = "../assets/fonts/AlteHaasGroteskBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F33C7652AAB8468CA44F20A8 /* AlteHaasGroteskRegular.ttf */ = {isa = PBXFileReference; name = "AlteHaasGroteskRegular.ttf"; path = "../assets/fonts/AlteHaasGroteskRegular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -501,6 +504,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				88D47C4577B447538C787F39 /* Pods */,
+				7FDF5D4AE20E43559C5234AE /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -532,6 +536,16 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		7FDF5D4AE20E43559C5234AE /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				C491E2A0991747699CCB6E0D /* AlteHaasGroteskBold.ttf */,
+				F33C7652AAB8468CA44F20A8 /* AlteHaasGroteskRegular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -903,6 +917,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				3C317523DF1B4A05866D5EB1 /* AlteHaasGroteskBold.ttf in Resources */,
+				C25ABE74B8724E89B8A82F4E /* AlteHaasGroteskRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
