@@ -96,7 +96,10 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
-
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
     defaultConfig {
         applicationId "com.yoto"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -141,9 +144,10 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-webrtc')
-    compile project(':react-native-fbsdk')
-    compile project(':react-native-device-info')
+    implementation project(':lottie-react-native')
+    implementation project(':react-native-webrtc')
+    implementation project(':react-native-fbsdk')
+    implementation project(':react-native-device-info')
     implementation project(':react-native-webrtc')
     implementation project(':react-native-fbsdk')
     implementation 'com.facebook.android:facebook-android-sdk:4.34.0'

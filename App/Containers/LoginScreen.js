@@ -10,12 +10,20 @@ import styles from './Styles/LoginScreenStyle'
 import { bindActionCreators, AuthActions } from '../Redux/Actions'
 import { Images } from '../Themes'
 import { Actions } from 'react-native-router-flux'
+import LottieView from 'lottie-react-native'
 
 class LoginScreen extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <Image source={Images.logo} style={styles.logo} resizeMode='contain' />
+        {/* <Image source={Images.logo} style={styles.logo} resizeMode='contain' /> */}
+
+        <LottieView
+          source={require('../Fixtures/lotties/login_page.json')}
+          autoPlay
+          loop
+          style={styles.lottie}
+        />
 
         <TouchableOpacity style={styles.phoneLoginButton} onPress={Actions.register}>
           <Text style={styles.phoneLoginText}>Sign Up with Phone <Text style={styles.emoji}>📱</Text></Text>

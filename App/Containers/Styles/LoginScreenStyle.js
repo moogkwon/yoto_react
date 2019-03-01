@@ -7,17 +7,20 @@ export default StyleSheet.create({
     width: Metrics.screenWidth,
     backgroundColor: Colors.primaryColor,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-end',
+    paddingBottom: 80
   },
-  logo: {
-    width: 115,
-    height: 115
+  lottie: {
+    width: Metrics.screenWidth,
+    height: Metrics.screenHeight,
+    top: -50,
+    position: 'absolute'
   },
   phoneLoginButton: {
     width: 310,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#FFFC00',
+    backgroundColor: Colors.yellow,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 80
