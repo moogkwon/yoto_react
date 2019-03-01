@@ -21,7 +21,9 @@ const colors = {
   eggplant: '#251a34',
   border: '#483F53',
   banner: '#5F3E63',
+  yellow: '#FFFC00',
   text: '#E0D7E5',
+  disabledText: '#ADC4DF',
   primaryColor: '#0080FF'
 }
 

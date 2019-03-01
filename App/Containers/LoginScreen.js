@@ -25,9 +25,9 @@ class LoginScreen extends Component {
           <TouchableOpacity style={styles.roundButton} onPress={Actions.register}>
             <Image source={Images.facebook} style={styles.roundImage} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.roundButton} onPress={Actions.register}>
+          {/* <TouchableOpacity style={styles.roundButton} onPress={Actions.register}>
             <Image source={Images.instagram} style={styles.roundImage} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity style={styles.roundButton} onPress={Actions.register}>
             <Image source={Images.google} style={styles.roundImage} />
           </TouchableOpacity>

@@ -23,7 +23,7 @@ export default StyleSheet.create({
     marginTop: 80
   },
   phoneLoginText: {
-    fontFamily: Fonts.type.base,
+    fontFamily: Fonts.type.alteBold,
     fontSize: 21,
     color: Colors.primaryColor
   },
@@ -32,6 +32,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    width: 310
+    width: 150
   }
 })

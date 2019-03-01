@@ -16,6 +16,7 @@ import {
 import LaunchScreen from '../Containers/LaunchScreen'
 import RandomModeScreen from '../Containers/RandomModeScreen'
 import LoginScreen from '../Containers/LoginScreen'
+import RegisterScreen from '../Containers/RegisterScreen'
 
 const styles = StyleSheet.create({
   container: {
@@ -73,12 +74,13 @@ class AppNavigation extends Component {
               hideNavBar
               key='root'
               titleStyle={{ alignSelf: 'center' }}
-             >
+            >
               <Scene key='randomMode' component={RandomModeScreen} title='Webrtc' />
             </Stack>
 
             <Scene key='launch' component={LaunchScreen} title='Launch' initial />
-            <Scene key='login' component={LoginScreen} title='Login' />
+            <Scene key='login' component={LoginScreen} title='Login' type='reset' />
+            <Scene key='register' component={RegisterScreen} title='Register' type='reset' />
           </Modal>
 
         </Overlay>
