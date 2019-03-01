@@ -67,7 +67,6 @@ class RegisterScreen extends Component {
                   color: this.state.birth_year ? Colors.snow : Colors.disabledText,
                   fontFamily: Fonts.type.alteBold,
                   fontSize: 20,
-                  paddingLeft: 10,
                   marginLeft: 10
                 }
               }}
