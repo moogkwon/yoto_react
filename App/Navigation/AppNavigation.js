@@ -18,6 +18,10 @@ import RandomModeScreen from '../Containers/RandomModeScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import RegisterScreen from '../Containers/RegisterScreen'
 import UploadProfileScreen from '../Containers/UploadProfileScreen'
+import TabIcon from '../Components/tab/TabIcon'
+import { Images } from '../Themes'
+import FriendsScreen from '../Containers/FriendsScreen'
+import ProfileScreen from '../Containers/ProfileScreen'
 
 const styles = StyleSheet.create({
   container: {
@@ -76,7 +80,44 @@ class AppNavigation extends Component {
               key='root'
               titleStyle={{ alignSelf: 'center' }}
             >
-              <Scene key='randomMode' component={RandomModeScreen} title='Webrtc' />
+              <Tabs
+                key='tabBar'
+                swipeEnabled={false}
+                showLabel={false}
+                tabBarPosition='bottom'
+                hideNavBar
+                lazy
+              // tabBarComponent={CustomTabBar}
+              >
+                <Scene
+                  key='friends'
+                  component={FriendsScreen}
+                  title='Friends'
+                  icon={TabIcon}
+                  inactiveIcon={Images.icFriends}
+                  activeIcon={Images.icFriendsActive}
+                  hideNavBar
+                />
+                <Scene
+                  initial
+                  key='randomMode'
+                  component={RandomModeScreen}
+                  title='Searching'
+                  icon={TabIcon}
+                  inactiveIcon={Images.icSearching}
+                  activeIcon={Images.icSearchingActive}
+                  hideNavBar
+                />
+                <Scene
+                  key='profile'
+                  component={ProfileScreen}
+                  title='Profile'
+                  icon={TabIcon}
+                  inactiveIcon={Images.icSelective}
+                  activeIcon={Images.icSelectiveActive}
+                  hideNavBar
+                />
+              </Tabs>
             </Stack>
 
             <Scene key='launch' component={LaunchScreen} title='Launch' initial />

@@ -112,7 +112,7 @@ class UploadProfileScreen extends Component {
           <TouchableOpacity style={styles.chooseButton} onPress={() => this.actionSheetUpload.show()}>
             <Text style={styles.chooseText}>Upload selfie <Text style={styles.emoji}>🤳</Text></Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.continueButton} onPress={Actions.home}>
+          <TouchableOpacity style={styles.continueButton} onPress={Actions.root}>
             <Text style={styles.continueText}>Continue <Text style={styles.emoji}>➡️</Text></Text>
           </TouchableOpacity>
         </View>

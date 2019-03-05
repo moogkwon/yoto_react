@@ -1,19 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  Text
+  View,
+  Image
 } from 'react-native'
 
 const propTypes = {
-  selected: PropTypes.bool,
+  focused: PropTypes.bool,
   title: PropTypes.string
 }
 
 const TabIcon = (props) => {
-  return <Text
-    style={{ color: props.focused ? 'red' : 'black' }}
-  >{props.title}
-  </Text>
+  return (
+    <View style={{ flex: props.title === 'Searching' ? 3 : 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Image source={props.focused ? props.activeIcon : props.inactiveIcon} style={{ width: 30, height: 30 }} resizeMode='contain' />
+    </View>
+  )
 }
 
 TabIcon.propTypes = propTypes

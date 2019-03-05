@@ -12,7 +12,13 @@ const images = {
   icMaleActive: require('../Images/Icons/male-active.png'),
   icInsta: require('../Images/Icons/insta.png'),
   icLgbtq: require('../Images/Icons/l.g.b.t.q.png'),
-  icLgbtqActive: require('../Images/Icons/l.g.b.t.q-active.png')
+  icLgbtqActive: require('../Images/Icons/l.g.b.t.q-active.png'),
+  icFriends: require('../Images/Icons/friends.png'),
+  icFriendsActive: require('../Images/Icons/friends-active.png'),
+  icSearching: require('../Images/Icons/searching.png'),
+  icSearchingActive: require('../Images/Icons/searching-active.png'),
+  icSelective: require('../Images/Icons/selective.png'),
+  icSelectiveActive: require('../Images/Icons/selective-active.png')
 }
 
 export default images

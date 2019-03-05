@@ -10,6 +10,7 @@ import styles from './Styles/RegisterScreenStyle'
 import { Images, Colors, Fonts } from '../Themes'
 import RNPickerSelect from 'react-native-picker-select'
 import range from 'lodash/range'
+import { Actions } from 'react-native-router-flux'
 
 class RegisterScreen extends Component {
   constructor (props) {
@@ -117,7 +118,7 @@ class RegisterScreen extends Component {
             ? <View style={styles.signupButton}>
               <Text style={styles.signupText}>Sign Up</Text>
             </View>
-            : <TouchableOpacity style={[styles.signupButton, { backgroundColor: Colors.yellow }]}>
+            : <TouchableOpacity style={[styles.signupButton, { backgroundColor: Colors.yellow }]} onPress={Actions.root}>
               <Text style={[styles.signupText, { color: Colors.primaryColor }]}>Sign Up</Text>
             </TouchableOpacity>
           }

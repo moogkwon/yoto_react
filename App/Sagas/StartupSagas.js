@@ -6,5 +6,5 @@ import { delay } from 'redux-saga'
 // process STARTUP actions
 export function * startup (action) {
   // yield delay(1000)
-  yield call(Actions.upload, { type: ActionConst.RESET })
+  yield call(Actions.root, { type: ActionConst.RESET })
 }
