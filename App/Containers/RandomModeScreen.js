@@ -103,10 +103,10 @@ class RandomModeScreen extends Component {
         <TouchableOpacity
           style={styles.blackCover}
           activeOpacity={1}
-          onPress={() => Actions.matching({ duration: 0, localStreamURL: this.state.localStreamURL })}
+          onPress={() => Actions.hunting({ localStreamURL: this.state.localStreamURL })}
         >
           <Text style={styles.actionLabel}>
-            {this.state.connected ? 'Tap to start' : 'Connecting...'}
+            Tap to start
           </Text>
         </TouchableOpacity>
       </View>
