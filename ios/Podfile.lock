@@ -32,6 +32,11 @@ PODS:
   - react-native-fbsdk/Share (0.8.0):
     - FBSDKShareKit
     - React
+  - react-native-video (4.4.0):
+    - React
+    - react-native-video/Video (= 4.4.0)
+  - react-native-video/Video (4.4.0):
+    - React
   - react-native-webrtc (1.67.1):
     - React
   - React/ART (0.57.7):
@@ -78,6 +83,7 @@ DEPENDENCIES:
   - lottie-ios (from `../node_modules/lottie-ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
+  - react-native-video (from `../node_modules/react-native-video`)
   - react-native-webrtc (from `../node_modules/react-native-webrtc`)
   - React/ART (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
@@ -113,6 +119,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
+  react-native-video:
+    :path: "../node_modules/react-native-video"
   react-native-webrtc:
     :path: "../node_modules/react-native-webrtc"
   RNDeviceInfo:
@@ -132,12 +140,13 @@ SPEC CHECKSUMS:
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
+  react-native-video: 44c6befbc1526283ca1919891fcebe4680feade4
   react-native-webrtc: 31b6d3f1e3e2ce373aa43fd682b04367250f807d
   RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
   RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
   RSKImageCropper: 98296ad26b41753f796b6898d015509598f13d97
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 50d012f0bee4fdba76f99efeafd87a28b24b72a3
+PODFILE CHECKSUM: c49ee32fabbb966a3d11fde8986fa5935454f33a
 
 COCOAPODS: 1.5.3

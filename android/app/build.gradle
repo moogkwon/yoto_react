@@ -110,6 +110,12 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled  true
+    }
+    dexOptions {
+        jumboMode true
+        incremental true
+        javaMaxHeapSize "4g"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -145,6 +151,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-video')
     implementation project(':react-native-video-processing')
     implementation project(':react-native-image-crop-picker')
     implementation project(':lottie-react-native')

@@ -22,6 +22,7 @@ import TabIcon from '../Components/tab/TabIcon'
 import { Images } from '../Themes'
 import FriendsScreen from '../Containers/FriendsScreen'
 import ProfileScreen from '../Containers/ProfileScreen'
+import MatchingScreen from '../Containers/MatchingScreen'
 
 const styles = StyleSheet.create({
   container: {
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
 // }
 
 const getSceneStyle = () => ({
-  backgroundColor: '#F5FCFF',
+  backgroundColor: '#000',
   shadowOpacity: 1,
   shadowRadius: 3
 })
@@ -118,6 +119,7 @@ class AppNavigation extends Component {
                   hideNavBar
                 />
               </Tabs>
+              <Scene key='matching' component={MatchingScreen} title='Matching' duration={1} direction='none' />
             </Stack>
 
             <Scene key='launch' component={LaunchScreen} title='Launch' initial />
