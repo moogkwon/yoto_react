@@ -1,6 +1,7 @@
 // leave off @2x/@3x
 const images = {
   logo: require('../Images/logo.png'),
+  instagramButton: require('../Images/instagram_button.png'),
   facebook: require('../Images/facebook.png'),
   instagram: require('../Images/instagram.png'),
   google: require('../Images/google.png'),
@@ -18,7 +19,9 @@ const images = {
   icSearching: require('../Images/Icons/searching.png'),
   icSearchingActive: require('../Images/Icons/searching-active.png'),
   icSelective: require('../Images/Icons/selective.png'),
-  icSelectiveActive: require('../Images/Icons/selective-active.png')
+  icSelectiveActive: require('../Images/Icons/selective-active.png'),
+  icReport: require('../Images/Icons/report.png'),
+  icPeaceOut: require('../Images/Icons/peace_out.png')
 }
 
 export default images

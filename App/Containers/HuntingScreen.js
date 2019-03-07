@@ -28,7 +28,10 @@ class HuntingScreen extends Component {
   }
 
   onPressNext () {
-    this.setState({ otherUser: null })
+    this.setState({
+      otherUser: null,
+      isCalling: false
+    })
     setTimeout(() => {
       this.setState({
         otherUser: {
@@ -40,52 +43,65 @@ class HuntingScreen extends Component {
           profile_photo_url: 'https://d2po1euy792wnk.cloudfront.net/uploads/reports/97f7a7c03e7011e99b88996f621edabc_screenshot.jpg'
         }
       })
-      setTimeout(() => {
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
         this.onPressNext()
       }, 20000)
     }, 5000)
   }
 
   onPressMeet () {
+    clearTimeout(this.timeout)
     this.setState({ isCalling: true })
+  }
+
+  onFinish () {
+    this.onPressNext()
   }
 
   render () {
     const { otherUser, isCalling } = this.state
-    return isCalling
-      ? <CallingScreen
-        localStreamURL={this.props.localStreamURL}
-      />
-      : otherUser
-        ? <MatchingScreen
+    if (isCalling) {
+      return (
+        <CallingScreen
+          localStreamURL={this.props.localStreamURL}
+          onTimeout={() => this.onFinish()}
+          onFinish={() => this.onFinish()}
+        />
+      )
+    } else if (otherUser) {
+      return (
+        <MatchingScreen
           otherUser={otherUser}
           onPressNext={() => this.onPressNext()}
           onPressMeet={() => this.onPressMeet()}
         />
-        : (
-          <View style={styles.container}>
-            <View style={styles.video}>
-              <RTCView
-                streamURL={this.props.localStreamURL}
-                style={styles.rtcView}
-                objectFit='cover'
-              />
-            </View>
-            <View style={styles.blackCover}>
-
-              <LottieView
-                source={require('../Fixtures/lotties/random_loading.json')}
-                autoPlay
-                loop
-                style={styles.lottie}
-                resizeMode='cover'
-              />
-              <Text style={styles.actionLabel}>
-                {/* {'some text to show'} */}
-              </Text>
-            </View>
-          </View >
-        )
+      )
+    } else {
+      return (
+        <View style={styles.container}>
+          <View style={styles.video}>
+            <RTCView
+              streamURL={this.props.localStreamURL}
+              style={styles.rtcView}
+              objectFit='cover'
+            />
+          </View>
+          <View style={styles.blackCover}>
+            <LottieView
+              source={require('../Fixtures/lotties/random_loading.json')}
+              autoPlay
+              loop
+              style={styles.lottie}
+              resizeMode='cover'
+            />
+            <Text style={styles.actionLabel}>
+              {/* {'some text to show'} */}
+            </Text>
+          </View>
+        </View >
+      )
+    }
   }
 }
 
