@@ -21,7 +21,8 @@ const images = {
   icSelective: require('../Images/Icons/selective.png'),
   icSelectiveActive: require('../Images/Icons/selective-active.png'),
   icReport: require('../Images/Icons/report.png'),
-  icPeaceOut: require('../Images/Icons/peace_out.png')
+  icPeaceOut: require('../Images/Icons/peace_out.png'),
+  icChevron: require('../Images/Icons/chevron.png')
 }
 
 export default images
