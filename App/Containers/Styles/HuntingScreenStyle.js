@@ -105,5 +105,16 @@ export default StyleSheet.create({
     fontFamily: Fonts.type.alteBold,
     fontSize: 28,
     color: '#fff'
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    padding: 20
+  },
+  closeText: {
+    fontFamily: Fonts.type.alte,
+    fontSize: 20,
+    color: '#fff'
   }
 })

@@ -78,7 +78,8 @@ export default StyleSheet.create({
     marginLeft: 40
   },
   buttons: {
-    marginVertical: 20,
+    marginTop: 20,
+    marginBottom: 40,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

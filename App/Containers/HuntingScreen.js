@@ -9,6 +9,7 @@ import styles from './Styles/HuntingScreenStyle'
 import LottieView from 'lottie-react-native'
 import MatchingScreen from './MatchingScreen'
 import CallingScreen from './CallingScreen'
+import { Actions } from 'react-native-router-flux'
 
 const {
   RTCView
@@ -59,6 +60,10 @@ class HuntingScreen extends Component {
     this.onPressNext()
   }
 
+  onPressClose () {
+    Actions.pop()
+  }
+
   render () {
     const { otherUser, isCalling } = this.state
     if (isCalling) {
@@ -98,6 +103,9 @@ class HuntingScreen extends Component {
             <Text style={styles.actionLabel}>
               {/* {'some text to show'} */}
             </Text>
+            <TouchableOpacity style={styles.closeButton} onPress={() => this.onPressClose()}>
+              <Text style={styles.closeText}>X</Text>
+            </TouchableOpacity>
           </View>
         </View >
       )
