@@ -10,6 +10,7 @@ import LottieView from 'lottie-react-native'
 import MatchingScreen from './MatchingScreen'
 import CallingScreen from './CallingScreen'
 import { Actions } from 'react-native-router-flux'
+import randomStrings from '../Fixtures/randomStrings.json'
 
 const {
   RTCView
@@ -20,12 +21,19 @@ class HuntingScreen extends Component {
     super(props)
     this.state = {
       otherUser: null,
-      isCalling: false
+      isCalling: false,
+      randomString: ''
     }
   }
 
   componentDidMount () {
-    this.onPressNext()
+    // this.onPressNext()
+    this.startRandomMessage()
+  }
+
+  componentWillUnmount = () => {
+    clearInterval(this.randomStringInterval)
+    clearTimeout(this.timeout)
   }
 
   onPressNext () {
@@ -62,6 +70,13 @@ class HuntingScreen extends Component {
 
   onPressClose () {
     Actions.pop()
+  }
+
+  startRandomMessage () {
+    this.setState({ randomString: randomStrings[Math.floor(Math.random() * randomStrings.length)] })
+    this.randomStringInterval = setInterval(() => {
+      this.setState({ randomString: randomStrings[Math.floor(Math.random() * randomStrings.length)] })
+    }, 5000)
   }
 
   render () {
@@ -101,7 +116,7 @@ class HuntingScreen extends Component {
               resizeMode='cover'
             />
             <Text style={styles.actionLabel}>
-              {/* {'some text to show'} */}
+              {this.state.randomString}
             </Text>
             <TouchableOpacity style={styles.closeButton} onPress={() => this.onPressClose()}>
               <Text style={styles.closeText}>X</Text>

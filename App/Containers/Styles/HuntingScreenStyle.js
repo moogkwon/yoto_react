@@ -37,8 +37,9 @@ export default StyleSheet.create({
   },
   actionLabel: {
     fontFamily: Fonts.type.alteBold,
-    fontSize: 29,
-    color: '#fff'
+    fontSize: 18,
+    color: '#fff',
+    textAlign: 'center'
   },
   lottie: {
     width: Metrics.screenWidth,
