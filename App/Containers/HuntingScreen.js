@@ -27,7 +27,7 @@ class HuntingScreen extends Component {
   }
 
   componentDidMount () {
-    // this.onPressNext()
+    this.onPressNext()
     this.startRandomMessage()
   }
 
