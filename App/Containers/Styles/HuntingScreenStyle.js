@@ -114,7 +114,7 @@ export default StyleSheet.create({
     padding: 20
   },
   closeText: {
-    fontFamily: Fonts.type.alte,
+    fontFamily: Fonts.type.alteBold,
     fontSize: 20,
     color: '#fff'
   }

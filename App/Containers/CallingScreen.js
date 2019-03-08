@@ -27,6 +27,10 @@ class CallingScreen extends Component {
   }
 
   onUnlock () {
+    this.props.onRequestUnlock()
+  }
+
+  unlock () {
     this.setState({ isUnlocked: true }, () => this.unlock.play())
   }
 
@@ -36,8 +40,11 @@ class CallingScreen extends Component {
 
   onPressFollow () {
     this.setState({ isRequested: true }, () => {
-      // this.becomeFriend.play()
-      this.becomeFriendLgbtq.play()
+      if (Math.random() > 0.5) {
+        this.becomeFriend.play()
+      } else {
+        this.becomeFriendLgbtq.play()
+      }
       this.setState({ isUnlocked: true })
     })
   }

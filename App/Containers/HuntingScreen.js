@@ -11,6 +11,7 @@ import MatchingScreen from './MatchingScreen'
 import CallingScreen from './CallingScreen'
 import { Actions } from 'react-native-router-flux'
 import randomStrings from '../Fixtures/randomStrings.json'
+import PaymentScreen from './PaymentScreen'
 
 const {
   RTCView
@@ -22,6 +23,7 @@ class HuntingScreen extends Component {
     this.state = {
       otherUser: null,
       isCalling: false,
+      isShowPurchase: false,
       randomString: ''
     }
   }
@@ -79,14 +81,37 @@ class HuntingScreen extends Component {
     }, 5000)
   }
 
+  onRequestUnlock () {
+    this.setState({ isShowPurchase: true })
+  }
+
+  onPressPurcase () {
+    this.setState({ isShowPurchase: false }, () => this.calling.unlock())
+  }
+
   render () {
+    return (
+      <View style={styles.container}>
+        {this.renderContent()}
+        <PaymentScreen
+          visible={this.state.isShowPurchase}
+          onClose={() => this.setState({ isShowPurchase: false })}
+          onPressPurchase={productId => this.onPressPurcase(productId)}
+        />
+      </View>
+    )
+  }
+
+  renderContent () {
     const { otherUser, isCalling } = this.state
     if (isCalling) {
       return (
         <CallingScreen
+          ref={ref => (this.calling = ref)}
           localStreamURL={this.props.localStreamURL}
           onTimeout={() => this.onFinish()}
           onFinish={() => this.onFinish()}
+          onRequestUnlock={() => this.onRequestUnlock()}
         />
       )
     } else if (otherUser) {

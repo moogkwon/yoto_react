@@ -1,7 +1,10 @@
-// leave off @2x/@3x
 const images = {
   logo: require('../Images/logo.png'),
   instagramButton: require('../Images/instagram_button.png'),
+  paymentBackground: require('../Images/payment_background.png'),
+  purchase1: require('../Images/purchase1.png'),
+  purchase2: require('../Images/purchase2.png'),
+  purchase3: require('../Images/purchase3.png'),
   facebook: require('../Images/facebook.png'),
   instagram: require('../Images/instagram.png'),
   google: require('../Images/google.png'),
