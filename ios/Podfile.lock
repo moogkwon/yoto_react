@@ -1,4 +1,5 @@
 PODS:
+  - AccountKit (4.35.0)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -70,6 +71,9 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - RNAccountKit (1.1.0):
+    - AccountKit
+    - React
   - RNDeviceInfo (0.21.5):
     - React
   - RNImageCropPicker (0.23.0):
@@ -97,12 +101,14 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNAccountKit (from `../node_modules/react-native-facebook-account-kit/ios`)
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AccountKit
     - Bolts
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -123,6 +129,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-video"
   react-native-webrtc:
     :path: "../node_modules/react-native-webrtc"
+  RNAccountKit:
+    :path: "../node_modules/react-native-facebook-account-kit/ios"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
   RNImageCropPicker:
@@ -131,6 +139,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
 
 SPEC CHECKSUMS:
+  AccountKit: 870ccaf5d33facda9408783e28fbe68c5211e069
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   FBSDKCoreKit: ae214474b25033399c131dc81d258e412582a2ba
   FBSDKLoginKit: 7a1e411d46acc8834588eca437daf34de42e1d52
@@ -142,11 +151,12 @@ SPEC CHECKSUMS:
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-video: 44c6befbc1526283ca1919891fcebe4680feade4
   react-native-webrtc: 31b6d3f1e3e2ce373aa43fd682b04367250f807d
+  RNAccountKit: 3dd31fff73c90378ac89dc7611da0dc22b29f84b
   RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
   RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
   RSKImageCropper: 98296ad26b41753f796b6898d015509598f13d97
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: c49ee32fabbb966a3d11fde8986fa5935454f33a
+PODFILE CHECKSUM: 9d4de88e1d310905e842e40a3ecb801420bec0d2
 
 COCOAPODS: 1.5.3

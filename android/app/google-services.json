@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "883615025605",
+    "firebase_url": "https://my-project-1536919263461.firebaseio.com",
+    "project_id": "my-project-1536919263461",
+    "storage_bucket": "my-project-1536919263461.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883615025605:android:f3fd340df8c10244",
+        "android_client_info": {
+          "package_name": "com.yoto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883615025605-rjac8vn56h0fl1275fbthng64r4he6pp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3c0P5Ahp7_DP8scBj7R32QICgTNWlyxo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

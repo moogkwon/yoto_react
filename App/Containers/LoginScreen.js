@@ -11,31 +11,6 @@ import { Images } from '../Themes'
 import LottieView from 'lottie-react-native'
 
 class LoginScreen extends Component {
-  componentDidMount () {
-    // RNAccountKit.configure({
-    //   responseType: 'token', // 'token' by default,
-    //   titleType: 'app_name',
-    //   initialAuthState: '',
-    //   initialEmail: 'some.initial@email.com',
-    //   initialPhoneCountryPrefix: '+84', // autodetected if none is provided
-    //   initialPhoneNumber: '',
-    //   facebookNotificationsEnabled: true, // true by default
-    //   readPhoneStateEnabled: true, // true by default,
-    //   receiveSMS: true, // true by default,
-    //   countryWhitelist: ['VN'], // [] by default
-    //   countryBlacklist: ['US'], // [] by default
-    //   defaultCountry: 'VN',
-    //   theme: {
-    //     buttonBackgroundColor: Color.hex(Colors.primary),
-    //     buttonDisabledBackgroundColor: Color.hex(Colors.disabled),
-    //     buttonTextColor: Color.hex(Colors.snow),
-    //     buttonDisabledTextColor: Color.hex(Colors.snow),
-    //     headerBackgroundColor: Color.hex(Colors.primary),
-    //     inputBackgroundColor: Color.hex(Colors.input)
-    //   } // for iOS only, see the Theme section
-    // })
-  }
-
   render () {
     return (
       <View style={styles.container}>

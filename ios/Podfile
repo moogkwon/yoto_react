@@ -39,4 +39,8 @@ target 'Yoto' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'RNAccountKit', :path => '../node_modules/react-native-facebook-account-kit/ios'
+
+  pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
+
 end

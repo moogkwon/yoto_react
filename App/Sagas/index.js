@@ -10,7 +10,7 @@ import { AuthTypes } from '../Redux/AuthRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
-import { socialLogin } from './AuthSagas'
+import { socialLogin, logout } from './AuthSagas'
 // import {
 // login
 // } from './AuthSagas'
@@ -26,7 +26,8 @@ export default function * root () {
   yield all([
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
-    takeLatest(AuthTypes.SOCIAL_LOGIN, socialLogin, api)
+    takeLatest(AuthTypes.SOCIAL_LOGIN, socialLogin, api),
+    takeLatest(AuthTypes.LOGOUT, logout, api)
     // some sagas receive extra parameters in addition to an action
     // takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)
   ])

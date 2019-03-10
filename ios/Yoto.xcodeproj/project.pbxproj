@@ -21,8 +21,10 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		3C317523DF1B4A05866D5EB1 /* AlteHaasGroteskBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C491E2A0991747699CCB6E0D /* AlteHaasGroteskBold.ttf */; };
+		4A924A1722359BCC00699D6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A924A1622359BCC00699D6A /* GoogleService-Info.plist */; };
 		59897C4EFEC319D75313B346 /* libPods-Yoto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C17A36EE5FBD8CA8BDAE4083 /* libPods-Yoto.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		A38FB025DCDD40CAA3DBEEBD /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A43C3A8AE04EF6AB5C5F16 /* libRNFirebase.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B2B06C9305F74DA2BC8A72D4 /* libRNVideoProcessing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61724FB96F084F05988F153C /* libRNVideoProcessing.a */; };
 		C25ABE74B8724E89B8A82F4E /* AlteHaasGroteskRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F33C7652AAB8468CA44F20A8 /* AlteHaasGroteskRegular.ttf */; };
@@ -260,6 +262,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNVideoProcessing;
 		};
+		4A924A1422359BC500699D6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45D1C94C6A36482D85392DB8 /* RNFirebase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFirebase;
+		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -316,6 +325,8 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Yoto/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		45D1C94C6A36482D85392DB8 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
+		4A924A1622359BCC00699D6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Yoto/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		61724FB96F084F05988F153C /* libRNVideoProcessing.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVideoProcessing.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -323,6 +334,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		9124BD7BE98654901C788A98 /* Pods-Yoto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yoto.release.xcconfig"; path = "Pods/Target Support Files/Pods-Yoto/Pods-Yoto.release.xcconfig"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		B9A43C3A8AE04EF6AB5C5F16 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		C17A36EE5FBD8CA8BDAE4083 /* libPods-Yoto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yoto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C491E2A0991747699CCB6E0D /* AlteHaasGroteskBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AlteHaasGroteskBold.ttf; path = ../assets/fonts/AlteHaasGroteskBold.ttf; sourceTree = "<group>"; };
 		F33C7652AAB8468CA44F20A8 /* AlteHaasGroteskRegular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AlteHaasGroteskRegular.ttf; path = ../assets/fonts/AlteHaasGroteskRegular.ttf; sourceTree = "<group>"; };
@@ -347,6 +359,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				59897C4EFEC319D75313B346 /* libPods-Yoto.a in Frameworks */,
 				B2B06C9305F74DA2BC8A72D4 /* libRNVideoProcessing.a in Frameworks */,
+				A38FB025DCDD40CAA3DBEEBD /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +431,7 @@
 		13B07FAE1A68108700A75B9A /* Yoto */ = {
 			isa = PBXGroup;
 			children = (
+				4A924A1622359BCC00699D6A /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -465,6 +479,7 @@
 			isa = PBXGroup;
 			children = (
 				61724FB96F084F05988F153C /* libRNVideoProcessing.a */,
+				B9A43C3A8AE04EF6AB5C5F16 /* libRNFirebase.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -473,6 +488,14 @@
 			isa = PBXGroup;
 			children = (
 				4A39DBCB222FB33200B1D13E /* libRNVideoProcessing.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4A924A1122359BC500699D6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4A924A1522359BC500699D6A /* libRNFirebase.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -520,6 +543,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				10ACC57C44BF40668CDE3E64 /* RNVideoProcessing.xcodeproj */,
+				45D1C94C6A36482D85392DB8 /* RNFirebase.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -667,6 +691,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 4A924A1122359BC500699D6A /* Products */;
+					ProjectRef = 45D1C94C6A36482D85392DB8 /* RNFirebase.xcodeproj */;
 				},
 				{
 					ProductGroup = 4A39DBC7222FB33200B1D13E /* Products */;
@@ -912,6 +940,13 @@
 			remoteRef = 4A39DBCA222FB33200B1D13E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4A924A1522359BC500699D6A /* libRNFirebase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFirebase.a;
+			remoteRef = 4A924A1422359BC500699D6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -956,6 +991,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				4A924A1722359BCC00699D6A /* GoogleService-Info.plist in Resources */,
 				3C317523DF1B4A05866D5EB1 /* AlteHaasGroteskBold.ttf in Resources */,
 				C25ABE74B8724E89B8A82F4E /* AlteHaasGroteskRegular.ttf in Resources */,
 			);
@@ -985,12 +1021,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Yoto/Pods-Yoto-resources.sh",
+				"${PODS_ROOT}/AccountKit/AccountKitStrings.bundle",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle",
 				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccountKitStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RSKImageCropperStrings.bundle",
@@ -1073,11 +1111,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-video-processing/ios/RNVideoProcessing/**",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = Yoto/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/Yoto\"",
 					"\"$(SRCROOT)/Yoto\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1100,11 +1140,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-video-processing/ios/RNVideoProcessing/**",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = Yoto/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/Yoto\"",
 					"\"$(SRCROOT)/Yoto\"",
 				);
 				OTHER_LDFLAGS = (

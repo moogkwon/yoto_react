@@ -28,6 +28,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb1821673364590265</string>
+				<string>ak1821673364590265</string>
 			</array>
 		</dict>
 	</array>
@@ -35,6 +36,8 @@
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>1821673364590265</string>
+	<key>AccountKitClientToken</key>
+	<string>74973dfc040d90c161d8b05b9c2b0317</string>
 	<key>FacebookDisplayName</key>
 	<string>Yoto</string>
 	<key>LSApplicationQueriesSchemes</key>

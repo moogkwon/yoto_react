@@ -16,6 +16,9 @@ import { Actions } from 'react-native-router-flux'
 // import { AuthSelectors } from '../Redux/AuthRedux'
 import { LoginManager, AccessToken } from 'react-native-fbsdk'
 import { Alert } from 'react-native'
+import RNAccountKit, { Color } from 'react-native-facebook-account-kit'
+import { Colors } from '../Themes'
+import { GoogleSignin } from 'react-native-google-signin'
 
 export function * facebookLogin (api, action) {
   try {
@@ -43,8 +46,8 @@ export function * googleLogin () {
     if (hasPlayService) {
       yield GoogleSignin.configure({
         scopes: ['https://www.googleapis.com/auth/userinfo.profile'], // what API you want to access on behalf of the user, default is email and profile
-        iosClientId: Config.GOOGLE_IOS_CLIENT_ID, // only for iOS
-        webClientId: Config.GOOGLE_WEB_CLIENT_ID, // client ID of type WEB for your server (needed to verify user ID and offline access)
+        // iosClientId: Config.GOOGLE_IOS_CLIENT_ID, // only for iOS
+        webClientId: '883615025605-rjac8vn56h0fl1275fbthng64r4he6pp.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
         offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
         hostedDomain: '', // specifies a hosted domain restriction
         forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login
@@ -62,6 +65,28 @@ export function * googleLogin () {
 }
 
 export function * phoneLogin () {
+  RNAccountKit.configure({
+    responseType: 'token', // 'token' by default,
+    titleType: 'app_name',
+    initialAuthState: '',
+    initialEmail: 'some.initial@email.com',
+    initialPhoneCountryPrefix: '+1', // autodetected if none is provided
+    initialPhoneNumber: '',
+    facebookNotificationsEnabled: true, // true by default
+    readPhoneStateEnabled: true, // true by default,
+    receiveSMS: true, // true by default,
+    // countryWhitelist: ['VN'], // [] by default
+    // countryBlacklist: ['US'], // [] by default
+    defaultCountry: 'US'
+    // theme: {
+    //   buttonBackgroundColor: Color.hex(Colors.primary),
+    //   buttonDisabledBackgroundColor: Color.hex(Colors.disabled),
+    //   buttonTextColor: Color.hex(Colors.snow),
+    //   buttonDisabledTextColor: Color.hex(Colors.snow),
+    //   headerBackgroundColor: Color.hex(Colors.primary),
+    //   inputBackgroundColor: Color.hex(Colors.input)
+    // } // for iOS only, see the Theme section
+  })
   try {
     const result = yield RNAccountKit.loginWithPhone()
     if (!result) {
@@ -71,7 +96,8 @@ export function * phoneLogin () {
       return result.token
     }
   } catch (error) {
-    Alert.alert('Error', error.message)
+    console.log(error)
+    error.message !== 'Login cancelled' && Alert.alert('Error', error.message)
   }
 }
 
@@ -80,6 +106,10 @@ export function * socialLogin (api, action) {
   let token = ''
   if (social === 'facebook') {
     token = yield call(facebookLogin)
+  } else if (social === 'google') {
+    token = yield call(googleLogin)
+  } else if (social === 'phone') {
+    token = yield call(phoneLogin)
   }
   if (token) {
     // make the call to the api
@@ -93,4 +123,9 @@ export function * socialLogin (api, action) {
       // yield put(AuthActions.loginFailure())
     }
   }
+}
+
+export function * logout (api, action) {
+  yield call(Actions.login)
+  yield put(AuthActions.logoutSuccess())
 }

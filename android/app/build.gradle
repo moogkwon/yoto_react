@@ -117,6 +117,16 @@ android {
         incremental true
         javaMaxHeapSize "4g"
     }
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -133,6 +143,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
@@ -151,6 +162,9 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-google-signin')
+    implementation project(':react-native-firebase')
+    implementation project(':react-native-facebook-account-kit')
     implementation project(':react-native-video')
     implementation project(':react-native-video-processing')
     implementation project(':react-native-image-crop-picker')
@@ -167,6 +181,11 @@ dependencies {
     // For animated GIF support
     implementation 'com.facebook.fresco:fresco:1.12.0'
     implementation 'com.facebook.fresco:animated-gif:1.12.0'
+    implementation "com.google.android.gms:play-services-base:16.0.1"
+    implementation "com.google.firebase:firebase-core:16.0.6"
+    implementation "com.google.firebase:firebase-auth:16.1.0"
+    implementation "com.google.firebase:firebase-messaging:17.3.4"
+
 }
 
 // Run this once to be able to run the application with BUCK
@@ -175,3 +194,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'

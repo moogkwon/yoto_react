@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, View, Image, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, View, Image, TouchableOpacity, Alert } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -11,6 +11,8 @@ import { Images } from '../Themes'
 import ActionSheet from 'react-native-actionsheet'
 import ImagePicker from 'react-native-image-crop-picker'
 import { VideoPlayer } from 'react-native-video-processing'
+import { bindActionCreators } from 'redux'
+import { AuthActions } from '../Redux/Actions'
 
 class ProfileScreen extends Component {
   _handlerActionSheetPhoto (index) {
@@ -68,6 +70,16 @@ class ProfileScreen extends Component {
     ImagePicker.clean()
   };
 
+  onLogoutPress () {
+    Alert.alert('Yoto', 'Do you want to logout?', [
+      {
+        text: 'Logout',
+        onPress: () => this.props.logout()
+      },
+      { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' }
+    ])
+  }
+
   render () {
     const user = {
 
@@ -120,7 +132,7 @@ class ProfileScreen extends Component {
           <Image source={Images.icChevron} style={styles.iconArrow} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonLogout}>
+        <TouchableOpacity style={styles.buttonLogout} onPress={() => this.onLogoutPress()}>
           <Text style={styles.rowLabel}>Logout</Text>
         </TouchableOpacity>
 
@@ -148,6 +160,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    ...bindActionCreators(AuthActions, dispatch)
   }
 }
 

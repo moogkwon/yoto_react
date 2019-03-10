@@ -8,6 +8,7 @@ const { Types, Creators } = createActions({
   socialLogin: ['social'],
   loginSuccess: ['data'],
   setUser: ['user'],
+  logout: null,
   logoutSuccess: null
 
 })
@@ -31,9 +32,8 @@ export const loginSuccess = (state, { data }) => {
   return state.merge({ ...data })
 }
 export const setUser = (state, { user }) => state.merge({ user })
-export const logoutSuccess = (state) => {
-  return state.merge({ user: null, token: null, refreshToken: null, type: null })
-}
+export const logout = (state) => state
+export const logoutSuccess = (state) => INITIAL_STATE
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -41,6 +41,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SOCIAL_LOGIN]: socialLogin,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.SET_USER]: setUser,
+  [Types.LOGOUT]: logout,
   [Types.LOGOUT_SUCCESS]: logoutSuccess
 
 })
