@@ -106,5 +106,12 @@ export default StyleSheet.create({
     fontFamily: Fonts.type.alteBold,
     fontSize: 28,
     color: '#fff'
+  },
+  buttonReport: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    paddingVertical: 10,
+    paddingHorizontal: 20
   }
 })

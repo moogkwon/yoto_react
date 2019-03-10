@@ -54,6 +54,9 @@ class MatchingScreen extends Component {
               <Text style={styles.buttonText}>Meet 🤳</Text>
             </TouchableOpacity>
           </View>
+          <TouchableOpacity style={styles.buttonReport} onPress={() => this.props.onPressReport()}>
+            <Text style={styles.buttonText}>...</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )

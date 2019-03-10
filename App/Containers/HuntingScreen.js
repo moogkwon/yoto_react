@@ -12,6 +12,7 @@ import CallingScreen from './CallingScreen'
 import { Actions } from 'react-native-router-flux'
 import randomStrings from '../Fixtures/randomStrings.json'
 import PaymentScreen from './PaymentScreen'
+import { ActionSheetCustom } from 'react-native-actionsheet'
 
 const {
   RTCView
@@ -89,6 +90,14 @@ class HuntingScreen extends Component {
     this.setState({ isShowPurchase: false }, () => this.calling.unlock())
   }
 
+  onReportActionsheetPress () {
+
+  }
+
+  onReportProfileActionsheetPress () {
+
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -97,6 +106,29 @@ class HuntingScreen extends Component {
           visible={this.state.isShowPurchase}
           onClose={() => this.setState({ isShowPurchase: false })}
           onPressPurchase={productId => this.onPressPurcase(productId)}
+        />
+
+        <ActionSheetCustom
+          ref={o => { this.reportActionSheet = o }}
+          title='Would you like to report this user?'
+          message="Our goal is to create a respectful community. We review the reoirts very seriously. please don't hesitate to report. We will take care of the situation 👮‍"
+          options={[
+            'Person is nude 🔞',
+            'Person is mean 😤',
+            'Cancel'
+          ]}
+          cancelButtonIndex={2}
+          onPress={(index) => this.onReportActionsheetPress(index)}
+        />
+        <ActionSheetCustom
+          ref={o => { this.reportProfileActionSheet = o }}
+          title='Would you like to report this profile?'
+          options={[
+            'Report inapporopriate profile 👮‍',
+            'Cancel'
+          ]}
+          cancelButtonIndex={1}
+          onPress={(index) => this.onReportProfileActionsheetPress(index)}
         />
       </View>
     )
@@ -112,6 +144,7 @@ class HuntingScreen extends Component {
           onTimeout={() => this.onFinish()}
           onFinish={() => this.onFinish()}
           onRequestUnlock={() => this.onRequestUnlock()}
+          onReport={(photo) => this.reportActionSheet.show()}
         />
       )
     } else if (otherUser) {
@@ -120,6 +153,7 @@ class HuntingScreen extends Component {
           otherUser={otherUser}
           onPressNext={() => this.onPressNext()}
           onPressMeet={() => this.onPressMeet()}
+          onPressReport={() => this.reportProfileActionSheet.show()}
         />
       )
     } else {

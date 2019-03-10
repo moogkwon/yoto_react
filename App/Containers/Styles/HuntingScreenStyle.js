@@ -117,5 +117,11 @@ export default StyleSheet.create({
     fontFamily: Fonts.type.alteBold,
     fontSize: 20,
     color: '#fff'
+  },
+  actionSheetLabel: {
+    fontFamily: Fonts.type.alte,
+    fontSize: 18,
+    color: '#aaa',
+    textAlign: 'center'
   }
 })

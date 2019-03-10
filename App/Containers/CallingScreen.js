@@ -102,7 +102,7 @@ class CallingScreen extends Component {
         )}
 
         <View style={styles.bottomView}>
-          <TouchableOpacity style={styles.reportButton}>
+          <TouchableOpacity style={styles.reportButton} onPress={() => this.props.onReport()}>
             <Image source={Images.icReport} style={styles.reportIcon} resizeMode='contain' />
           </TouchableOpacity>
           {this.state.isRequested
