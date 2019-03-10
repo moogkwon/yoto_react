@@ -6,5 +6,11 @@ import { delay } from 'redux-saga'
 // process STARTUP actions
 export function * startup (action) {
   // yield delay(1000)
-  yield call(Actions.root, { type: ActionConst.RESET })
+  const auth = yield select(state => state.auth)
+  if (auth.refresh_token) {
+    // call refresh token
+    yield call(Actions.root, { type: ActionConst.RESET })
+  } else {
+    yield call(Actions.login, { type: ActionConst.RESET })
+  }
 }

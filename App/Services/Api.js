@@ -20,6 +20,9 @@ const create = (baseURL = 'http://3.93.63.217:3333/api/v1') => {
     timeout: 10000
   })
 
+  api.addMonitor(response => __DEV__ &&
+    (console.log(response.config.method, response.config.url) || console.log(response)))
+
   // ------
   // STEP 2
   // ------

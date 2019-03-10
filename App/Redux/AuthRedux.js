@@ -5,7 +5,7 @@ import { AsyncStorage } from 'react-native'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  socialLogin: ['social', 'data'],
+  socialLogin: ['social'],
   loginSuccess: ['data'],
   setUser: ['user'],
   logoutSuccess: null
@@ -20,7 +20,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   user: null,
   token: null,
-  refreshToken: null,
+  refresh_token: null,
   type: null
 })
 
