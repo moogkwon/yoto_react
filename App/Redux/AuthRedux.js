@@ -1,6 +1,5 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
-import { AsyncStorage } from 'react-native'
 // import _ from 'lodash'
 /* ------------- Types and Action Creators ------------- */
 
@@ -9,8 +8,10 @@ const { Types, Creators } = createActions({
   loginSuccess: ['data'],
   setUser: ['user'],
   logout: null,
-  logoutSuccess: null
-
+  logoutSuccess: null,
+  updateProfile: ['data'],
+  updateProfileSuccess: ['user'],
+  updateProfileFailure: null
 })
 
 export const AuthTypes = Types
@@ -35,6 +36,10 @@ export const setUser = (state, { user }) => state.merge({ user })
 export const logout = (state) => state
 export const logoutSuccess = (state) => INITIAL_STATE
 
+export const updateProfile = (state) => state
+export const updateProfileSuccess = (state, { user }) => state.merge({ user })
+export const updateProfileFailure = (state, { error }) => state.merge({ error })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -42,6 +47,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.SET_USER]: setUser,
   [Types.LOGOUT]: logout,
-  [Types.LOGOUT_SUCCESS]: logoutSuccess
+  [Types.LOGOUT_SUCCESS]: logoutSuccess,
 
+  [Types.UPDATE_PROFILE]: updateProfile,
+  [Types.UPDATE_PROFILE_SUCCESS]: updateProfileSuccess,
+  [Types.UPDATE_PROFILE_FAILURE]: updateProfileFailure
 })

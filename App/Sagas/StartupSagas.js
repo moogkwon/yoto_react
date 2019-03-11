@@ -5,7 +5,7 @@ import { delay } from 'redux-saga'
 import { Alert } from 'react-native'
 
 // process STARTUP actions
-export function * startup (action) {
+export function * startup (api, action) {
   // yield delay(1000)
   const auth = yield select(state => state.auth)
   if (auth.refresh_token && auth.user) {
@@ -14,10 +14,13 @@ export function * startup (action) {
       yield call(Actions.login, { type: ActionConst.RESET })
       Alert.alert('Yoto', 'You are blocked')
     } else if (!auth.user.instagram) {
+      api.setToken(auth.token)
       yield call(Actions.register, { type: ActionConst.RESET })
     } else if (!auth.user.profile_video_url && auth.user.profile_photo_url) {
+      api.setToken(auth.token)
       yield call(Actions.upload, { type: ActionConst.RESET })
     } else {
+      api.setToken(auth.token)
       yield call(Actions.root, { type: ActionConst.RESET })
     }
   } else {

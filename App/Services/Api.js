@@ -20,6 +20,8 @@ const create = (baseURL = 'http://3.93.63.217:3333/api/v1') => {
     timeout: 10000
   })
 
+  const setToken = token => api.setHeader('Authorization', 'Bearer ' + token)
+
   api.addMonitor(response => __DEV__ &&
     (console.log(response.config.method, response.config.url) || console.log(response)))
 
@@ -38,6 +40,7 @@ const create = (baseURL = 'http://3.93.63.217:3333/api/v1') => {
   // way at this level.
   //
   const socialLogin = (social, data) => api.post(`/auth/login/${social}`, data)
+  const updateProfile = (id, data) => api.post(`/users/${id}`, data)
 
   // ------
   // STEP 3
@@ -52,8 +55,10 @@ const create = (baseURL = 'http://3.93.63.217:3333/api/v1') => {
   // private scoped goodies in JavaScript.
   //
   return {
+    setToken,
     // a list of the API functions from step 2
-    socialLogin
+    socialLogin,
+    updateProfile
   }
 }
 

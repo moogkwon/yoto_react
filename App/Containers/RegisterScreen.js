@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, Image, Alert } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -11,6 +11,9 @@ import { Images, Colors, Fonts } from '../Themes'
 import RNPickerSelect from 'react-native-picker-select'
 import range from 'lodash/range'
 import { Actions } from 'react-native-router-flux'
+import Validator from 'validatorjs/dist/validator'
+import { bindActionCreators } from 'redux'
+import { AuthActions } from '../Redux/Actions'
 
 class RegisterScreen extends Component {
   constructor (props) {
@@ -22,6 +25,30 @@ class RegisterScreen extends Component {
       gender: null,
       lgbtq: null
     }
+  }
+
+  onSubmit () {
+    let rules = {
+      name: 'required',
+      instagram: 'required',
+      birth_year: 'required',
+      gender: 'required'
+    }
+    let validation = new Validator(this.state, rules)
+    if (validation.fails()) {
+      this.setState({ errors: validation.errors })
+      const error = Object.values(validation.errors.errors)[0][0]
+      Alert.alert('Error', error)
+      return false
+    }
+    this.props.updateProfile({
+      first_name: this.state.name.split(' ')[0],
+      last_name: this.state.name.split(' ')[1] || '',
+      instagram: this.state.instagram,
+      birth_year: this.state.birth_year,
+      gender: this.state.gender,
+      lgbtq: !!this.state.lgbtq
+    })
   }
 
   render () {
@@ -118,7 +145,7 @@ class RegisterScreen extends Component {
             ? <View style={styles.signupButton}>
               <Text style={styles.signupText}>Sign Up</Text>
             </View>
-            : <TouchableOpacity style={[styles.signupButton, { backgroundColor: Colors.yellow }]} onPress={Actions.root}>
+            : <TouchableOpacity style={[styles.signupButton, { backgroundColor: Colors.yellow }]} onPress={() => this.onSubmit()}>
               <Text style={[styles.signupText, { color: Colors.primaryColor }]}>Sign Up</Text>
             </TouchableOpacity>
           }
@@ -135,6 +162,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    ...bindActionCreators(AuthActions, dispatch)
   }
 }
 
