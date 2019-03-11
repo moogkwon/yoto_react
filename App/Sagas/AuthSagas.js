@@ -167,10 +167,13 @@ export function * getCurrentUser (api) {
       yield call(Actions.login, { type: ActionConst.RESET })
       Alert.alert('Yoto', 'You are blocked')
     } else if (!user.instagram) {
+      yield put(AuthActions.setUser(user))
       yield call(Actions.register, { type: ActionConst.RESET })
     } else if (!user.profile_video_url && !user.profile_photo_url) {
+      yield put(AuthActions.setUser(user))
       yield call(Actions.upload, { type: ActionConst.RESET })
     } else {
+      yield put(AuthActions.setUser(user))
       yield call(Actions.root, { type: ActionConst.RESET })
     }
     // yield put(AuthActions.getCurrentUserSuccess(response.data.data))
@@ -188,6 +191,8 @@ export function * uploadProfile (api, action) {
       'Content-Type': 'multipart/form-data'
     }, [{ name: 'file', filename: 'profile.jpg', mime: 'image/jpg', data: RNFetchBlob.wrap(action.file) }])
     __DEV__ && console.log('upload', upload)
+    const result = JSON.parse(upload.data)
+    yield put(AuthActions.setUser(result.data))
     yield call(Actions.root)
   } else if (action.media_type === 'video') {
     const url = `${Config.apiURL}/users/upload-profile-video`
@@ -196,6 +201,8 @@ export function * uploadProfile (api, action) {
       'Content-Type': 'multipart/form-data'
     }, [{ name: 'file', filename: 'profile.mp4', mime: 'video/mp4', data: RNFetchBlob.wrap(action.file) }])
     __DEV__ && console.log('upload', upload)
+    const result = JSON.parse(upload.data)
+    yield put(AuthActions.setUser(result.data))
     yield call(Actions.root)
   }
 }

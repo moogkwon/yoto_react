@@ -22,7 +22,7 @@ class UploadProfileScreen extends Component {
   }
 
   async _handlerActionSheetPhoto (index) {
-    console.log(index)
+    ImagePicker.clean()
     try {
       if (index === 0) {
         const image = await ImagePicker.openPicker({

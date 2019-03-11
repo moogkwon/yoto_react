@@ -10,59 +10,46 @@ import Video from 'react-native-video'
 import { Images } from '../Themes'
 import ActionSheet from 'react-native-actionsheet'
 import ImagePicker from 'react-native-image-crop-picker'
-import { VideoPlayer } from 'react-native-video-processing'
+// import { VideoPlayer } from 'react-native-video-processing'
 import { bindActionCreators } from 'redux'
 import { AuthActions } from '../Redux/Actions'
 
 class ProfileScreen extends Component {
-  _handlerActionSheetPhoto (index) {
-    if (index === 0) {
-      ImagePicker.openPicker({
-        mediaType: 'video',
-        width: 720,
-        height: 1280
-      }).then(image => {
-        __DEV__ && console.log(image)
-        this.setState({ media: image })
-        // this.props.uploadAvatar(image.path)
-      })
-    }
+  async _handlerActionSheetPhoto (index) {
+    try {
+      if (index === 0) {
+        const result = await ImagePicker.openPicker({
+          mediaType: 'video',
+          width: 720,
+          height: 1280
+        })
+        __DEV__ && console.log(result)
+        this.props.uploadProfile('video', result.path)
+      }
 
-    if (index === 1) {
-      ImagePicker.openCamera({
-        mediaType: 'video',
-        width: 720,
-        height: 1280
-      }).then(image => {
-        __DEV__ && console.log(image)
-        this.setState({ media: image })
-        // this.props.uploadAvatar(image.path)
-      })
-    }
-    if (index === 2) {
-      ImagePicker.openPicker({
-        mediaType: 'photo',
-        cropping: true,
-        width: 720,
-        height: 1280
-      }).then(image => {
-        __DEV__ && console.log(image)
-        this.setState({ media: image })
-        // this.props.uploadAvatar(image.path)
-      })
-    }
+      if (index === 1) {
+        const result = await ImagePicker.openPicker({
+          mediaType: 'photo',
+          cropping: true,
+          width: 720,
+          height: 1280
+        })
+        __DEV__ && console.log(result)
+        this.props.uploadProfile('photo', result.path)
+      }
 
-    if (index === 3) {
-      ImagePicker.openCamera({
-        mediaType: 'photo',
-        cropping: true,
-        width: 720,
-        height: 1280
-      }).then(image => {
-        __DEV__ && console.log(image)
-        this.setState({ media: image })
-        // this.props.uploadAvatar(image.path)
-      })
+      if (index === 2) {
+        const result = await ImagePicker.openCamera({
+          mediaType: 'photo',
+          cropping: true,
+          width: 720,
+          height: 1280
+        })
+        __DEV__ && console.log(result)
+        this.props.uploadProfile('photo', result.path)
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -81,10 +68,8 @@ class ProfileScreen extends Component {
   }
 
   render () {
-    const user = {
-
-    }
-    return (
+    const user = this.props.user
+    return !!user && (
       <ScrollView style={styles.container}>
         <TouchableOpacity style={styles.video} onPress={() => this.actionSheetUpload.show()}>
           {user.profile_video_url
@@ -140,12 +125,12 @@ class ProfileScreen extends Component {
           ref={o => { this.actionSheetUpload = o }}
           options={[
             'Choose video 🎬',
-            'Record video 📹',
+            // 'Record video 📹',
             'Choose photo 📸',
             'Take photo 🤳',
             'Cancel'
           ]}
-          cancelButtonIndex={4}
+          cancelButtonIndex={3}
           onPress={(index) => this._handlerActionSheetPhoto(index)}
         />
       </ScrollView>
@@ -155,6 +140,7 @@ class ProfileScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.auth.user
   }
 }
 

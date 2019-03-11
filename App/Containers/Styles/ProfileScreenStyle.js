@@ -16,6 +16,11 @@ export default StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 5
   },
+  backgroundVideo: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 5
+  },
   avatarView: {
     width: 56,
     height: 56,
@@ -24,6 +29,11 @@ export default StyleSheet.create({
     overflow: 'hidden',
     alignSelf: 'center',
     marginTop: 10
+  },
+  avatar: {
+    width: 56,
+    height: 56,
+    borderRadius: 28
   },
   title: {
     fontFamily: Fonts.type.alteBold,
