@@ -6,12 +6,19 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   socialLogin: ['social'],
   loginSuccess: ['data'],
+
   setUser: ['user'],
+
   logout: null,
   logoutSuccess: null,
+
   updateProfile: ['data'],
   updateProfileSuccess: ['user'],
-  updateProfileFailure: null
+  updateProfileFailure: null,
+
+  uploadProfile: ['media_type', 'file'],
+  uploadProfileSuccess: ['user'],
+  uploadProfileFailure: null
 })
 
 export const AuthTypes = Types
@@ -40,6 +47,10 @@ export const updateProfile = (state) => state
 export const updateProfileSuccess = (state, { user }) => state.merge({ user })
 export const updateProfileFailure = (state, { error }) => state.merge({ error })
 
+export const uploadProfile = (state) => state
+export const uploadProfileSuccess = (state, { user }) => state.merge({ user })
+export const uploadProfileFailure = (state, { error }) => state.merge({ error })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -51,5 +62,9 @@ export const reducer = createReducer(INITIAL_STATE, {
 
   [Types.UPDATE_PROFILE]: updateProfile,
   [Types.UPDATE_PROFILE_SUCCESS]: updateProfileSuccess,
-  [Types.UPDATE_PROFILE_FAILURE]: updateProfileFailure
+  [Types.UPDATE_PROFILE_FAILURE]: updateProfileFailure,
+
+  [Types.UPLOAD_PROFILE]: uploadProfile,
+  [Types.UPLOAD_PROFILE_SUCCESS]: uploadProfileSuccess,
+  [Types.UPLOAD_PROFILE_FAILURE]: uploadProfileFailure
 })

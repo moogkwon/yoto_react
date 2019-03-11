@@ -3,7 +3,6 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-import { LoginButton, AccessToken } from 'react-native-fbsdk'
 
 // Styles
 import styles from './Styles/UploadProfileScreenStyle'
@@ -22,54 +21,42 @@ class UploadProfileScreen extends Component {
     }
   }
 
-  _handlerActionSheetPhoto (index) {
-    if (index === 0) {
-      ImagePicker.openPicker({
-        mediaType: 'video',
-        width: 720,
-        height: 1280
-      }).then(image => {
+  async _handlerActionSheetPhoto (index) {
+    console.log(index)
+    try {
+      if (index === 0) {
+        const image = await ImagePicker.openPicker({
+          mediaType: 'video',
+          width: 720,
+          height: 1280
+        })
         __DEV__ && console.log(image)
-        this.setState({ media: image })
-        // this.props.uploadAvatar(image.path)
-      })
-    }
+        this.setState({ media: image, type: 'video' })
+      }
 
-    if (index === 1) {
-      ImagePicker.openCamera({
-        mediaType: 'video',
-        width: 720,
-        height: 1280
-      }).then(image => {
+      if (index === 1) {
+        const image = await ImagePicker.openPicker({
+          mediaType: 'photo',
+          cropping: true,
+          width: 720,
+          height: 1280
+        })
         __DEV__ && console.log(image)
-        this.setState({ media: image })
-        // this.props.uploadAvatar(image.path)
-      })
-    }
-    if (index === 2) {
-      ImagePicker.openPicker({
-        mediaType: 'photo',
-        cropping: true,
-        width: 720,
-        height: 1280
-      }).then(image => {
-        __DEV__ && console.log(image)
-        this.setState({ media: image })
-        // this.props.uploadAvatar(image.path)
-      })
-    }
+        this.setState({ media: image, type: 'photo' })
+      }
 
-    if (index === 3) {
-      ImagePicker.openCamera({
-        mediaType: 'photo',
-        cropping: true,
-        width: 720,
-        height: 1280
-      }).then(image => {
+      if (index === 2) {
+        const image = await ImagePicker.openCamera({
+          mediaType: 'photo',
+          cropping: true,
+          width: 720,
+          height: 1280
+        })
         __DEV__ && console.log(image)
-        this.setState({ media: image })
-        // this.props.uploadAvatar(image.path)
-      })
+        this.setState({ media: image, type: 'photo' })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -112,21 +99,23 @@ class UploadProfileScreen extends Component {
           <TouchableOpacity style={styles.chooseButton} onPress={() => this.actionSheetUpload.show()}>
             <Text style={styles.chooseText}>Upload selfie <Text style={styles.emoji}>🤳</Text></Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.continueButton} onPress={Actions.root}>
-            <Text style={styles.continueText}>Continue <Text style={styles.emoji}>➡️</Text></Text>
-          </TouchableOpacity>
+          {this.state.media && (
+            <TouchableOpacity style={styles.continueButton} onPress={() => this.props.uploadProfile(this.state.type, this.state.media.path)}>
+              <Text style={styles.continueText}>Continue <Text style={styles.emoji}>➡️</Text></Text>
+            </TouchableOpacity>
+          )}
         </View>
 
         <ActionSheet
           ref={o => { this.actionSheetUpload = o }}
           options={[
             'Choose video 🎬',
-            'Record video 📹',
+            // 'Record video 📹',
             'Choose photo 📸',
             'Take photo 🤳',
             'Cancel'
           ]}
-          cancelButtonIndex={4}
+          cancelButtonIndex={3}
           onPress={(index) => this._handlerActionSheetPhoto(index)}
         />
       </View>

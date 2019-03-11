@@ -1,8 +1,9 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
+import Config from '../Config/AppConfig'
 
 // our "constructor"
-const create = (baseURL = 'http://3.93.63.217:3333/api/v1') => {
+const create = (baseURL = Config.apiURL) => {
   // ------
   // STEP 1
   // ------
@@ -14,7 +15,8 @@ const create = (baseURL = 'http://3.93.63.217:3333/api/v1') => {
     baseURL,
     // here are some default headers
     headers: {
-      'Cache-Control': 'no-cache'
+      'Cache-Control': 'no-cache',
+      'Accept': 'application/json'
     },
     // 10 second timeout...
     timeout: 10000
@@ -40,7 +42,8 @@ const create = (baseURL = 'http://3.93.63.217:3333/api/v1') => {
   // way at this level.
   //
   const socialLogin = (social, data) => api.post(`/auth/login/${social}`, data)
-  const updateProfile = (id, data) => api.post(`/users/${id}`, data)
+  const getCurrentUser = () => api.get(`/auth/me`)
+  const updateProfile = (id, data) => api.put(`/users/${id}`, data)
 
   // ------
   // STEP 3
@@ -58,6 +61,7 @@ const create = (baseURL = 'http://3.93.63.217:3333/api/v1') => {
     setToken,
     // a list of the API functions from step 2
     socialLogin,
+    getCurrentUser,
     updateProfile
   }
 }

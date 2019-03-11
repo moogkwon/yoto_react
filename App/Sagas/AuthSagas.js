@@ -17,8 +17,10 @@ import { Actions, ActionConst } from 'react-native-router-flux'
 import { LoginManager, AccessToken } from 'react-native-fbsdk'
 import { Alert } from 'react-native'
 import RNAccountKit, { Color } from 'react-native-facebook-account-kit'
-import { Colors } from '../Themes'
+// import { Colors } from '../Themes'
 import { GoogleSignin } from 'react-native-google-signin'
+import Config from '../Config/AppConfig'
+import RNFetchBlob from 'rn-fetch-blob'
 
 export function * facebookLogin (api, action) {
   try {
@@ -153,6 +155,48 @@ export function * updateProfile (api, action) {
   } else {
     Alert.alert('login error', response.problem)
     // yield put(AuthActions.loginFailure())
+  }
+}
+
+export function * getCurrentUser (api) {
+  const response = yield call(api.getCurrentUser)
+  __DEV__ && console.log('response', response)
+  if (response.ok) {
+    const user = response.data.data
+    if (user.is_blocked) {
+      yield call(Actions.login, { type: ActionConst.RESET })
+      Alert.alert('Yoto', 'You are blocked')
+    } else if (!user.instagram) {
+      yield call(Actions.register, { type: ActionConst.RESET })
+    } else if (!user.profile_video_url && !user.profile_photo_url) {
+      yield call(Actions.upload, { type: ActionConst.RESET })
+    } else {
+      yield call(Actions.root, { type: ActionConst.RESET })
+    }
+    // yield put(AuthActions.getCurrentUserSuccess(response.data.data))
+  } else {
+    yield call(Actions.login, { type: ActionConst.RESET })
+  }
+}
+
+export function * uploadProfile (api, action) {
+  const { token } = yield select(state => state.auth)
+  if (action.media_type === 'photo') {
+    const url = `${Config.apiURL}/users/upload-profile-photo`
+    const upload = yield RNFetchBlob.fetch('POST', url, {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    }, [{ name: 'file', filename: 'profile.jpg', mime: 'image/jpg', data: RNFetchBlob.wrap(action.file) }])
+    __DEV__ && console.log('upload', upload)
+    yield call(Actions.root)
+  } else if (action.media_type === 'video') {
+    const url = `${Config.apiURL}/users/upload-profile-video`
+    const upload = yield RNFetchBlob.fetch('POST', url, {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    }, [{ name: 'file', filename: 'profile.mp4', mime: 'video/mp4', data: RNFetchBlob.wrap(action.file) }])
+    __DEV__ && console.log('upload', upload)
+    yield call(Actions.root)
   }
 }
 
