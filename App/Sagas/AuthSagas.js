@@ -12,7 +12,7 @@
 
 import { call, put } from 'redux-saga/effects'
 import AuthActions from '../Redux/AuthRedux'
-import { Actions } from 'react-native-router-flux'
+import { Actions, ActionConst } from 'react-native-router-flux'
 // import { AuthSelectors } from '../Redux/AuthRedux'
 import { LoginManager, AccessToken } from 'react-native-fbsdk'
 import { Alert } from 'react-native'
@@ -116,8 +116,20 @@ export function * socialLogin (api, action) {
     const response = yield call(api.socialLogin, social, { social_token: token })
     // success?
     if (response.ok && response.status < 300) {
-      yield put(AuthActions.loginSuccess({ token: response.data.token, refresh_token: response.data.refreshToken, user: response.data.data }))
-      Actions.root({ type: 'replace' })
+      const auth = response.data
+      if (auth.user.is_blocked) {
+        yield call(Actions.login, { type: ActionConst.RESET })
+        Alert.alert('Yoto', 'You are blocked')
+      } else if (!auth.user.instagram) {
+        yield put(AuthActions.loginSuccess({ token: response.data.token, refresh_token: response.data.refreshToken }))
+        yield call(Actions.register, { type: ActionConst.RESET })
+      } else if (!auth.user.profile_video_url && auth.user.profile_photo_url) {
+        yield put(AuthActions.loginSuccess({ token: response.data.token, refresh_token: response.data.refreshToken, user: response.data.data }))
+        yield call(Actions.upload, { type: ActionConst.RESET })
+      } else {
+        yield put(AuthActions.loginSuccess({ token: response.data.token, refresh_token: response.data.refreshToken, user: response.data.data }))
+        yield call(Actions.root, { type: ActionConst.RESET })
+      }
     } else {
       Alert.alert('login error', response.problem)
       // yield put(AuthActions.loginFailure())
