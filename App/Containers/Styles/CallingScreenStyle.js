@@ -11,12 +11,15 @@ export default StyleSheet.create({
     flexDirection: 'column'
   },
   videoWidget: {
-    flex: 1,
+    height: (Metrics.screenHeight - Metrics.statusBarHeight) / 2,
+    borderWidth: 1,
+    borderColor: '#fff',
     width: Metrics.screenWidth,
-    backgroundColor: '#ccc'
+    backgroundColor: '#ccc',
+    overflow: 'hidden'
   },
   rtcView: {
-    flex: 1,
+    height: (Metrics.screenHeight - Metrics.statusBarHeight) / 2,
     width: Metrics.screenWidth
   },
   clockButton: {

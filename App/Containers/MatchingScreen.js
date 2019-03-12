@@ -47,12 +47,17 @@ class MatchingScreen extends Component {
           <Text style={styles.textDescription}>{otherUser.first_name} was made in <Text style={{ textDecorationLine: 'underline' }}>{otherUser.birth_year}</Text></Text>
           <Text style={styles.textDescription}>designed in {otherUser.location_country} <Flag code={otherUser.location_country_code} size={24} /></Text>
           <View style={styles.buttons}>
-            <TouchableOpacity style={styles.buttonNext} onPress={() => this.props.onPressNext()}>
-              <Text style={styles.buttonText}>Next ✋</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonMeet} onPress={() => this.props.onPressMeet()}>
+            {!this.props.isConnecting
+              ? (
+                <TouchableOpacity style={styles.buttonNext} onPress={() => this.props.onPressNext()}>
+                  <Text style={styles.buttonText}>Next ✋</Text>
+                </TouchableOpacity>
+              )
+              : <Text style={styles.connectingText}>🐌 Connecting... 🐌</Text>
+            }
+            {/* <TouchableOpacity style={styles.buttonMeet} onPress={() => this.props.onPressMeet()}>
               <Text style={styles.buttonText}>Meet 🤳</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <TouchableOpacity style={styles.buttonReport} onPress={() => this.props.onPressReport()}>
             <Text style={styles.buttonText}>...</Text>
@@ -63,14 +68,4 @@ class MatchingScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MatchingScreen)
+export default MatchingScreen

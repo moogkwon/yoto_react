@@ -82,7 +82,7 @@ export default StyleSheet.create({
     marginBottom: 40,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     width: Metrics.screenWidth - 80,
     marginLeft: 40
   },
@@ -113,5 +113,10 @@ export default StyleSheet.create({
     left: 0,
     paddingVertical: 10,
     paddingHorizontal: 20
+  },
+  connectingText: {
+    fontFamily: Fonts.type.alteBold,
+    fontSize: 18,
+    color: '#fff'
   }
 })

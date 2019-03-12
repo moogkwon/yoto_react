@@ -9,6 +9,7 @@ import styles from './Styles/RandomModeScreenStyle'
 import DeviceInfo from 'react-native-device-info'
 import WebRTCLib from 'react-native-webrtc'
 import { Actions } from 'react-native-router-flux'
+import Config from '../Config/AppConfig'
 
 const {
   MediaStreamTrack,
@@ -31,23 +32,26 @@ class RandomModeScreen extends Component {
   componentDidMount () {
     this.setupMediaStream()
     // Setup Socket
-    // this.socket = io.connect(`ws://3.93.63.217:3333/chat?token=${this.props.auth.token}&device_id=${DeviceInfo.getUniqueID()}`)
-    // this.socket.removeAllListeners()
-    // this.socket.on('connect', () => {
-    //   console.log('Socket Connected!')
-    //   this.setState({ connected: true })
-    // })
-    // this.socket.on('message', (message) => console.log(message))
-    // this.socket.on('disconnect', () => {
-    //   console.log('Socket Closed')
-    //   this.setState({ connected: false })
-    // })
-    // this.socket.on('match_new', (data) => this.onNewMaching(data))
-    // this.socket.on('match_close', () => this.closeMatching())
-    // this.socket.on('call_start', (data) => this.sendOffer(data))
-    // this.socket.on('call_offer', (data) => this.onOfferReceived(data))
-    // this.socket.on('call_answer', (data) => this.onAnswerReceived(data))
-    // this.socket.on('candidate', (data) => this.onRemoteIceCandidate(data))
+    this.socket = io.connect(Config.socketURL, {
+      query: {
+        token: this.props.auth.token,
+        device_id: DeviceInfo.getUniqueID()
+      }
+    })
+    console.log(this.socket)
+    this.socket.removeAllListeners()
+    this.socket.on('connect', () => {
+      console.log('Socket Connected!')
+      this.setState({ connected: true })
+    })
+    this.socket.on('message', (message) => console.log(message))
+    this.socket.on('disconnect', () => {
+      console.log('Socket Closed')
+      this.setState({ connected: false })
+    })
+    this.socket.on('ice_server', (data) => {
+      this.setState({ ice_servers: data.ice_servers })
+    })
   }
 
   componentWillUnmount () {
@@ -88,10 +92,11 @@ class RandomModeScreen extends Component {
   }
 
   render () {
+    console.log(Actions.currentScene)
     return (
       <View style={styles.container}>
         <View style={styles.video}>
-          {this.state.localStreamURL &&
+          {Actions.currentScene === '_randomMode' && this.state.localStreamURL &&
             <RTCView
               streamURL={this.state.localStreamURL}
               style={styles.rtcView}
@@ -100,15 +105,23 @@ class RandomModeScreen extends Component {
           }
           {/* <View style={this.state.connected ? styles.onlineCircle : styles.offlineCircle} /> */}
         </View>
-        <TouchableOpacity
-          style={styles.blackCover}
-          activeOpacity={1}
-          onPress={() => Actions.hunting({ localStreamURL: this.state.localStreamURL })}
-        >
-          <Text style={styles.actionLabel}>
-            Tap to start
-          </Text>
-        </TouchableOpacity>
+        {this.state.connected && this.state.localStreamURL
+          ? (
+            <TouchableOpacity
+              style={styles.blackCover}
+              activeOpacity={1}
+              onPress={() => Actions.hunting({
+                localStream: this.localStream,
+                localStreamURL: this.state.localStreamURL,
+                socket: this.socket,
+                ice_servers: this.state.ice_servers
+              })}
+            >
+              <Text style={styles.actionLabel}>Tap to start</Text>
+            </TouchableOpacity>
+          )
+          : <Text style={styles.actionLabel}>Waiting...</Text>
+        }
       </View>
     )
   }

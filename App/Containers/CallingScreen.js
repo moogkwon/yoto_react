@@ -1,5 +1,14 @@
 import React, { Component } from 'react'
-import { View, Text, Platform, TouchableOpacity, Alert, Image, ImageBackground } from 'react-native'
+import {
+    View,
+    Text,
+    Platform,
+    TouchableOpacity,
+    Alert,
+    Image,
+    ImageBackground,
+    Linking
+} from 'react-native'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 // Styles
@@ -18,12 +27,13 @@ class CallingScreen extends Component {
     this.state = {
       isUnlocked: false,
       isFriend: false,
-      isRequested: false
+      isRequested: false,
+      instagram: ''
     }
   }
 
   componentDidMount () {
-    this.clock.play()
+    this.lottieClock.play()
   }
 
   onUnlock () {
@@ -39,20 +49,39 @@ class CallingScreen extends Component {
   }
 
   onPressFollow () {
-    this.setState({ isRequested: true }, () => {
-      if (Math.random() > 0.5) {
-        this.becomeFriend.play()
+    this.setState({ isRequested: true })
+    this.props.onRequestFriend()
+  }
+
+  becomeFriend (lgbtq, instagram) {
+    this.setState({ isUnlocked: true, instagram }, () => {
+      if (!lgbtq) {
+        this.lottieFriend.play()
       } else {
-        this.becomeFriendLgbtq.play()
+        this.lottieFriendLgbtq.play()
       }
-      this.setState({ isUnlocked: true })
     })
+  }
+
+  async onPressInstagram () {
+    const url = `instagram://user?username=${this.state.instagram}`
+    const result = await Linking.canOpenURL(url)
+    if (result) {
+      Linking.openURL(url)
+    } else {
+      Linking.openURL(`https://instagram.com/${this.state.instagram}`)
+    }
   }
 
   render () {
     return (
       <View style={styles.container}>
         <View style={styles.video}>
+          <View style={styles.videoWidget}>
+            {this.props.localStreamURL &&
+              <RTCView streamURL={this.props.localStreamURL} style={styles.rtcView} objectFit='cover' />
+            }
+          </View>
           <View style={styles.videoWidget}>
             {this.props.remoteStreamURL
               ? <RTCView streamURL={this.props.remoteStreamURL} style={styles.rtcView} objectFit='cover' />
@@ -65,38 +94,33 @@ class CallingScreen extends Component {
               />
             }
           </View>
-          <View style={styles.videoWidget}>
-            {this.props.localStreamURL &&
-              <RTCView streamURL={this.props.localStreamURL} style={styles.rtcView} objectFit='cover' />
-            }
-          </View>
         </View>
 
         {this.state.isRequested && !this.state.isFriend && (
           <LottieView
             imageAssetsFolder={'lottie'}
             source={require('../Fixtures/lotties/add_friend.json')}
-            ref={becomeFriend => (this.becomeFriend = becomeFriend)}
+            ref={lottieFriend => (this.lottieFriend = lottieFriend)}
             style={styles.becomeFriend}
             loop={false}
-            onAnimationFinish={() => this.setState({ isFriend: true })}
+            onAnimationFinish={() => this.setState({ isFriend: true }, () => this.onPressInstagram())}
           />
         )}
         {this.state.isRequested && !this.state.isFriend && (
           <LottieView
             imageAssetsFolder={'lottie'}
             source={require('../Fixtures/lotties/add_friend_LGBTQ.json')}
-            ref={becomeFriendLgbtq => (this.becomeFriendLgbtq = becomeFriendLgbtq)}
+            ref={lottieFriendLgbtq => (this.lottieFriendLgbtq = lottieFriendLgbtq)}
             style={styles.becomeFriend}
             loop={false}
-            onAnimationFinish={() => this.setState({ isFriend: true })}
+            onAnimationFinish={() => this.setState({ isFriend: true }, () => this.onPressInstagram())}
           />
         )}
 
         {this.state.isFriend && (
-          <TouchableOpacity style={styles.instagramButton}>
+          <TouchableOpacity style={styles.instagramButton} onPress={() => this.onPressInstagram()}>
             <ImageBackground style={styles.instagramBackground} source={Images.instagramButton}>
-              <Text style={styles.instagramText}>{'123456789012345678901234567890'}</Text>
+              <Text style={styles.instagramText}>{this.state.instagram}</Text>
             </ImageBackground>
           </TouchableOpacity>
         )}
@@ -121,7 +145,7 @@ class CallingScreen extends Component {
             <LottieView
               imageAssetsFolder={'lottie'}
               source={require('../Fixtures/lotties/clock.json')}
-              ref={clock => (this.clock = clock)}
+              ref={lottieClock => (this.lottieClock = lottieClock)}
               style={styles.clock}
               loop={false}
               onAnimationFinish={() => this.props.onTimeout()}
